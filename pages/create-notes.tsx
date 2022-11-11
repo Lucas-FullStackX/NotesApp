@@ -14,16 +14,6 @@ const LoginPage: NextPage = () => {
   const { isLoading, session, error } = useSessionContext();
   const supabaseClient = useSupabaseClient<Database>();
 
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    async function loadData() {
-      const { data } = await supabaseClient.from('users').select('*').single();
-      setData(data);
-    }
-
-    loadData();
-  }, [supabaseClient]);
   console.log(session);
   if (!session)
     return (

@@ -11,7 +11,6 @@ import {
   Checkbox,
   InputAdornment
 } from '@mui/material';
-import { useForm } from 'react-hook-form';
 import {
   SKIN_TYPES,
   STATES,
@@ -22,9 +21,10 @@ import {
   SLEEP_TYPES,
   ANEMIC_STATUS
 } from './notes-types';
+import { useCreateNote } from './hooks/useCreateNote';
 
 export default function CreateForm(): JSX.Element {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useCreateNote();
   return (
     <Box>
       <form
@@ -32,15 +32,15 @@ export default function CreateForm(): JSX.Element {
           console.log(data);
         })}
       >
-        <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
-          <TextField label="Paciente" {...register('user')} />
+        {/* <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
+          <TextField label="Paciente" {...register('')} />
         </FormControl>
         <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
           <TextField label="edad" {...register('password')} />
-        </FormControl>
+        </FormControl> */}
         <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
           <InputLabel>Estado General</InputLabel>
-          <Select label="Estado General" {...register('status')}>
+          <Select label="Estado General" {...register('general_state')}>
             {STATES.map(state => (
               <MenuItem key={state} value={state}>
                 {state}
@@ -50,7 +50,7 @@ export default function CreateForm(): JSX.Element {
         </FormControl>
         <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
           <InputLabel>Estado Animico</InputLabel>
-          <Select label="Estado General" {...register('status')}>
+          <Select label="Estado Animico" {...register('anemic_state')}>
             {ANEMIC_STATUS.map(state => (
               <MenuItem key={state} value={state}>
                 {state}
@@ -60,7 +60,7 @@ export default function CreateForm(): JSX.Element {
         </FormControl>
         <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
           <InputLabel>Piel</InputLabel>
-          <Select label="Piel" {...register('status')}>
+          <Select label="Piel" {...register('skin')}>
             {SKIN_TYPES.map(skin => (
               <MenuItem key={skin} value={skin}>
                 {skin}
@@ -70,7 +70,7 @@ export default function CreateForm(): JSX.Element {
         </FormControl>
         <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
           <InputLabel>Deambulacion</InputLabel>
-          <Select label="Deambulacion" {...register('status')}>
+          <Select label="Deambulacion" {...register('wandering')}>
             {WANDERING_TYPES.map(wandering => (
               <MenuItem key={wandering} value={wandering}>
                 {wandering}
@@ -80,22 +80,22 @@ export default function CreateForm(): JSX.Element {
         </FormControl>
         <FormControl fullWidth>
           <FormControlLabel
-            control={<Checkbox {...register('notification')} />}
+            control={<Checkbox {...register('fallBool')} />}
             label="Caidas"
           />
         </FormControl>
         <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
-          <TextField label="Observaciones" {...register('password')} />
+          <TextField label="Observaciones" {...register('falls')} />
         </FormControl>
         <FormControl fullWidth>
           <FormControlLabel
-            control={<Checkbox {...register('notification')} />}
+            control={<Checkbox {...register('depositionBool')} />}
             label="Deposicion"
           />
         </FormControl>
         <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
           <InputLabel>Deposicion</InputLabel>
-          <Select label="Deambulacion" {...register('status')}>
+          <Select label="Deposicion" {...register('deposition')}>
             {DEPOSITION_TYPES.map(deposition => (
               <MenuItem key={deposition} value={deposition}>
                 {deposition}
@@ -103,14 +103,15 @@ export default function CreateForm(): JSX.Element {
             ))}
           </Select>
         </FormControl>
-
-        <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
+        <FormControl>
           <FormControlLabel
-            control={<Checkbox {...register('notification')} />}
+            control={<Checkbox {...register('dieresisBool')} />}
             label="Diuresis"
           />
-
-          <Select label="Deambulacion" {...register('status')}>
+        </FormControl>
+        <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
+          <InputLabel>Diuresis</InputLabel>
+          <Select label="Diuresis" {...register('dieresis')}>
             {DIURESIS_TYPES.map(diuresis => (
               <MenuItem key={diuresis} value={diuresis}>
                 {diuresis}
@@ -120,28 +121,28 @@ export default function CreateForm(): JSX.Element {
         </FormControl>
         <FormControl fullWidth>
           <FormControlLabel
-            control={<Checkbox {...register('notification')} />}
+            control={<Checkbox {...register('emesis')} />}
             label="Emesis"
           />
         </FormControl>
         <FormControl fullWidth>
           <FormControlLabel
-            control={<Checkbox {...register('notification')} />}
+            control={<Checkbox {...register('food')} />}
             label="Alimentacion"
           />
         </FormControl>
         <FormControl fullWidth>
           <FormControlLabel
-            control={<Checkbox {...register('notification')} />}
+            control={<Checkbox {...register('prosthesis')} />}
             label="Protesis"
           />
         </FormControl>
         <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
-          <TextField label="Novedades" {...register('password')} />
+          <TextField label="Novedades" {...register('news')} />
         </FormControl>
         <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
           <InputLabel>Medicamentos</InputLabel>
-          <Select label="Deambulacion" {...register('status')}>
+          <Select label="Medicamentos" {...register('medicines')}>
             {MEDICATIONS_TYPES.map(medication => (
               <MenuItem key={medication} value={medication}>
                 {medication}
@@ -151,7 +152,7 @@ export default function CreateForm(): JSX.Element {
         </FormControl>
         <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
           <InputLabel>Patron de Sueño</InputLabel>
-          <Select label="Deambulacion" {...register('status')}>
+          <Select label="Patron de Sueño" {...register('sleep')}>
             {SLEEP_TYPES.map(sleep => (
               <MenuItem key={sleep} value={sleep}>
                 {sleep}
@@ -159,7 +160,7 @@ export default function CreateForm(): JSX.Element {
             ))}
           </Select>
         </FormControl>
-        <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
+        {/* <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
           <TextField label="Tension Arterial" {...register('password')} />
         </FormControl>
         <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
@@ -179,7 +180,7 @@ export default function CreateForm(): JSX.Element {
         </FormControl>
         <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
           <TextField label="Novedades" {...register('password')} />
-        </FormControl>
+        </FormControl> */}
         <Button type="submit">SEND</Button>
       </form>
     </Box>

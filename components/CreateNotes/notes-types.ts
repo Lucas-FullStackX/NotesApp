@@ -23,8 +23,11 @@ export const NOTE_FORM_VALIDATOR_SCHEMA = yup
     prosthesis: yup.boolean(),
     medicines: yup.string(),
     wandering: yup.string(),
+    fallBool: yup.boolean(),
     falls: yup.string(),
+    depositionBool: yup.boolean(),
     deposition: yup.string(),
+    dieresisBool: yup.boolean(),
     dieresis: yup.string(),
     food: yup.boolean(),
     news: yup.string(),
@@ -32,3 +35,4 @@ export const NOTE_FORM_VALIDATOR_SCHEMA = yup
     assistant: yup.string()
   })
   .required();
+export type NoteFormType = typeof NOTE_FORM_VALIDATOR_SCHEMA['__outputType'];
