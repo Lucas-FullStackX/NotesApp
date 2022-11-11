@@ -7,25 +7,24 @@ import type { NextPage } from 'next';
 import Link from 'next/link';
 import { Database } from '../lib/database.types';
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
+import CreateForm from '../components/CreateNotes/CreateForm';
+import { Box } from '@mui/system';
 
 const LoginPage: NextPage = () => {
   const { isLoading, session, error } = useSessionContext();
   const supabaseClient = useSupabaseClient<Database>();
 
-  const [data, setData] =
-    useState<Database['public']['Tables']['Notes']['Row'][]>();
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     async function loadData() {
-      const { data } = await supabaseClient.from('Notes').select('*');
-      if (data) {
-        setData(data);
-      }
+      const { data } = await supabaseClient.from('users').select('*').single();
+      setData(data);
     }
 
     loadData();
   }, [supabaseClient]);
-  console.log(data);
+  console.log(session);
   if (!session)
     return (
       <>
@@ -40,9 +39,9 @@ const LoginPage: NextPage = () => {
     );
 
   return (
-    <>
-      <Link href="/create-notes">GO TO FORM</Link>
-    </>
+    <Box m={10}>
+      <CreateForm />
+    </Box>
   );
 };
 
