@@ -29,7 +29,7 @@ const LoginPage: NextPage = () => {
     );
 
   return (
-    <Box m={10}>
+    <Box m={3}>
       <CreateForm />
     </Box>
   );

@@ -7,24 +7,24 @@ import type { NextPage } from 'next';
 import Link from 'next/link';
 import { Database } from '../lib/database.types';
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
+import { useRouter } from 'next/router';
 
 const LoginPage: NextPage = () => {
   const { isLoading, session, error } = useSessionContext();
   const supabaseClient = useSupabaseClient<Database>();
-
+  const router = useRouter();
   const [data, setData] =
-    useState<Database['public']['Tables']['Notes']['Row'][]>();
+    useState<Database['public']['Tables']['notes']['Row'][]>();
 
   useEffect(() => {
-    async function loadData() {
-      const { data } = await supabaseClient.from('Notes').select('*');
-      if (data) {
-        setData(data);
+    async function redirect() {
+      if (session) {
+        router.push('/dashboard');
       }
     }
 
-    loadData();
-  }, [supabaseClient]);
+    redirect();
+  }, [session]);
   console.log(data);
   if (!session)
     return (

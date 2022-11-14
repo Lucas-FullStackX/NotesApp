@@ -26,7 +26,7 @@ export default function ProtectedPage({
 }
 
 export const getServerSideProps = withPageAuth({
-  redirectTo: '/',
+  redirectTo: '/dashboard',
   async getServerSideProps(ctx, supabase) {
     // Run queries with RLS on the server
     const { data } = await supabase.from('users').select('*');

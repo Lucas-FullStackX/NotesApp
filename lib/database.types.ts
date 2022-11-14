@@ -9,7 +9,7 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      Notes: {
+      notes: {
         Row: {
           id: number;
           created_at: string | null;
@@ -27,6 +27,7 @@ export interface Database {
           news: string | null;
           sleep: string | null;
           assistant: string | null;
+          signs: number | null;
         };
         Insert: {
           id?: number;
@@ -45,6 +46,7 @@ export interface Database {
           news?: string | null;
           sleep?: string | null;
           assistant?: string | null;
+          signs?: number | null;
         };
         Update: {
           id?: number;
@@ -63,6 +65,27 @@ export interface Database {
           news?: string | null;
           sleep?: string | null;
           assistant?: string | null;
+          signs?: number | null;
+        };
+      };
+      patient: {
+        Row: {
+          id: number;
+          created_at: string | null;
+          name: string;
+          date_of_birth: string | null;
+        };
+        Insert: {
+          id?: number;
+          created_at?: string | null;
+          name: string;
+          date_of_birth?: string | null;
+        };
+        Update: {
+          id?: number;
+          created_at?: string | null;
+          name?: string;
+          date_of_birth?: string | null;
         };
       };
       'vitalis signa': {
@@ -92,26 +115,6 @@ export interface Database {
           satietatem?: number | null;
           temperature?: number | null;
           news?: string | null;
-        };
-      };
-      wandering: {
-        Row: {
-          id: number;
-          created_at: string | null;
-          type: string | null;
-          observations: string | null;
-        };
-        Insert: {
-          id?: number;
-          created_at?: string | null;
-          type?: string | null;
-          observations?: string | null;
-        };
-        Update: {
-          id?: number;
-          created_at?: string | null;
-          type?: string | null;
-          observations?: string | null;
         };
       };
     };

@@ -1,9 +1,11 @@
-import { createTheme } from '@mui/material/styles'
+import { green, teal } from '@mui/material/colors';
+import { createTheme } from '@mui/material/styles';
 
 const lightTheme = createTheme({
   palette: {
-    mode: 'light'
+    primary: teal,
+    secondary: green
   }
-})
+});
 
-export default lightTheme
+export default lightTheme;
