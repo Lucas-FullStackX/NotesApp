@@ -20,7 +20,8 @@ export function useFetchNotes(): useFetchNotesResponse {
       setLoading(true);
       const { error: notesError, data: notesData } = await supabaseClient
         .from('notes')
-        .select('*');
+        .select('*')
+        .order('created_at', { ascending: false });
       if (notesError) {
         setError(notesError);
       }

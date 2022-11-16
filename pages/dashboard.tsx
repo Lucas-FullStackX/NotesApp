@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import type { NextPage } from 'next';
 import { useFetchNotes } from '../hooks/useFetchNotes';
-import { Link } from '../components/Buttons/Buttons';
+import NotesList from '../components/NotesList/NoteList';
+import NavBar from '../components/SideBar/NavBar';
 
 const Dashboard: NextPage = () => {
   const { data } = useFetchNotes();
   console.log(data);
 
-  return <Link href="/create-notes">GO TO FORM</Link>;
+  return (
+    <>
+      <NavBar>
+        <>
+          <Suspense fallback={<div>loading</div>}>
+            <NotesList notes={data} />
+          </Suspense>
+        </>
+      </NavBar>
+    </>
+  );
 };
 
 export default Dashboard;
