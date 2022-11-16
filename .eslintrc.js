@@ -10,7 +10,8 @@ module.exports = {
     'standard',
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
+    'plugin:react/jsx-runtime'
   ],
   settings: {
     react: { version: 'detect' }
@@ -23,6 +24,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module'
   },
+  ignorePatterns: ['**/.next/*.js'],
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
     'prettier/prettier': [
@@ -34,6 +36,10 @@ module.exports = {
     'space-before-function-paren': 'off',
     'react/prop-types': 'off',
     'no-use-before-define': 'off',
+    'no-unused-vars': [
+      'error',
+      { vars: 'all', args: 'after-used', ignoreRestSiblings: false }
+    ],
     '@typescript-eslint/no-use-before-define': 'off',
     semi: ['error', 'always'],
     '@typescript-eslint/semi': 'error'

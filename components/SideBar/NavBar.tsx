@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   alpha,
   AppBar,
@@ -10,7 +11,6 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
-import React, { useState } from 'react';
 import SideBar from './SideBar';
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({

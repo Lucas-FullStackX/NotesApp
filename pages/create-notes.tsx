@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
 import {
   useSessionContext,
   useSupabaseClient
 } from '@supabase/auth-helpers-react';
 import type { NextPage } from 'next';
-import Link from 'next/link';
 import { Database } from '../lib/database.types';
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import CreateForm from '../components/CreateNotes/CreateForm';

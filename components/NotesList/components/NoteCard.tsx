@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Paper, CardContent, Typography } from '@mui/material';
+import { useState } from 'react';
+import { Paper, Typography } from '@mui/material';
 import { Database } from '../../../lib/database.types';
 import { useRouter } from 'next/router';
 import { humanizeDate } from '../../../src/utils';

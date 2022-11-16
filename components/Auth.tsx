@@ -1,4 +1,3 @@
-import React from 'react';
 import { TextField, FormControl, Box, Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';

@@ -5,6 +5,7 @@ import { PostgrestError } from '@supabase/supabase-js';
 
 type useInsertNoteResponse = [
   createNote: (
+    // eslint-disable-next-line no-unused-vars
     info: Database['public']['Tables']['notes']['Insert']
   ) => Promise<void>,
   response: {

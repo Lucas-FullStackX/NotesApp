@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   useSessionContext,
   useSupabaseClient
@@ -13,8 +13,6 @@ const LoginPage: NextPage = () => {
   const { isLoading, session, error } = useSessionContext();
   const supabaseClient = useSupabaseClient<Database>();
   const router = useRouter();
-  const [data, setData] =
-    useState<Database['public']['Tables']['notes']['Row'][]>();
 
   useEffect(() => {
     async function redirect() {
@@ -25,7 +23,7 @@ const LoginPage: NextPage = () => {
 
     redirect();
   }, [session]);
-  console.log(data);
+
   if (!session)
     return (
       <>

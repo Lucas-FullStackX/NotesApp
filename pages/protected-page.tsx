@@ -1,5 +1,4 @@
 // pages/protected-page.js
-import React from 'react';
 import { withPageAuth, User } from '@supabase/auth-helpers-nextjs';
 import Link from 'next/link';
 
@@ -8,7 +7,7 @@ export default function ProtectedPage({
   data
 }: {
   user: User;
-  data: any;
+  data: unknown;
 }) {
   return (
     <>

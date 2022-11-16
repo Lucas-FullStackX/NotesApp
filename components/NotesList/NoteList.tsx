@@ -1,4 +1,3 @@
-import React from 'react';
 import { Stack, Fab } from '@mui/material';
 import { Database } from '../../lib/database.types';
 import NoteCard from './components/NoteCard';

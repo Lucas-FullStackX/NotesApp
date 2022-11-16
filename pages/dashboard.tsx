@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import type { NextPage } from 'next';
 import { useFetchNotes } from '../hooks/useFetchNotes';
 import NotesList from '../components/NotesList/NoteList';
