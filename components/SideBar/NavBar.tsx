@@ -3,7 +3,6 @@ import {
   alpha,
   AppBar,
   Box,
-  Drawer,
   IconButton,
   InputBase,
   styled,
@@ -72,22 +71,9 @@ export default function NavBar({ children }: { children: JSX.Element }) {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-
-          {/* <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-              <IconButton
-                size="large"
-                aria-label="show more"
-                aria-haspopup="true"
-                color="inherit"
-              >
-                <MoreIcon />
-              </IconButton>
-            </Box> */}
         </Toolbar>
       </AppBar>
-      <Drawer anchor="left" open={open} onClose={toggleDrawer}>
-        <SideBar />
-      </Drawer>
+      <SideBar open={open} onClose={toggleDrawer} />
       {children}
     </Box>
   );
