@@ -1,47 +1,9 @@
 import { useState } from 'react';
-import {
-  alpha,
-  AppBar,
-  Box,
-  IconButton,
-  InputBase,
-  styled,
-  Toolbar
-} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import { AppBar, Box, IconButton, Toolbar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SideBar from './SideBar';
+import SearchBar from './SearchBar';
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%'
-  }
-}));
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25)
-  },
-
-  width: '100%'
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center'
-}));
 export default function NavBar({ children }: { children: JSX.Element }) {
   const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
@@ -50,7 +12,7 @@ export default function NavBar({ children }: { children: JSX.Element }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <IconButton
             size="large"
             edge="start"
@@ -61,16 +23,7 @@ export default function NavBar({ children }: { children: JSX.Element }) {
           >
             <MenuIcon />
           </IconButton>
-
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Buscar..."
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+          <SearchBar />
         </Toolbar>
       </AppBar>
       <SideBar open={open} onClose={toggleDrawer} />
