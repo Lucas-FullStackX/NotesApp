@@ -16,7 +16,7 @@ const ROUTES: {
   route: string;
   icon: ReactNode;
 }[] = [
-  { routeName: 'Notes', route: '/dashboard', icon: <TextSnippetIcon /> },
+  { routeName: 'Notas', route: '/dashboard', icon: <TextSnippetIcon /> },
   { routeName: 'Pacientes', route: '/patients', icon: <TextSnippetIcon /> }
 ];
 

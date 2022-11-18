@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 export type Json =
   | string
   | number
@@ -29,6 +28,8 @@ export interface Database {
           sleep: string | null;
           assistant: string | null;
           signs: number | null;
+          code: number | null;
+          patient: number | null;
         };
         Insert: {
           id?: number;
@@ -48,6 +49,8 @@ export interface Database {
           sleep?: string | null;
           assistant?: string | null;
           signs?: number | null;
+          code?: number | null;
+          patient?: number | null;
         };
         Update: {
           id?: number;
@@ -67,6 +70,8 @@ export interface Database {
           sleep?: string | null;
           assistant?: string | null;
           signs?: number | null;
+          code?: number | null;
+          patient?: number | null;
         };
       };
       patient: {
@@ -123,7 +128,10 @@ export interface Database {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      increment: {
+        Args: { notes_id: number };
+        Returns: undefined;
+      };
     };
     Enums: {
       [_ in never]: never;

@@ -16,6 +16,7 @@ export const SLEEP_TYPES = ['24h', 'Dia', 'Noche'];
 
 export const NOTE_FORM_VALIDATOR_SCHEMA = yup
   .object({
+    patient: yup.string().required(),
     general_state: yup.string().required(),
     anemic_state: yup.string().required(),
     skin: yup.string(),
@@ -36,3 +37,5 @@ export const NOTE_FORM_VALIDATOR_SCHEMA = yup
   })
   .required();
 export type NoteFormType = typeof NOTE_FORM_VALIDATOR_SCHEMA['__outputType'];
+
+export type AnemicStatusType = 'Tranquilo' | 'Agresivo';

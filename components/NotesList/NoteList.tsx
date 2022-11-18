@@ -1,18 +1,21 @@
 import { Stack, Fab } from '@mui/material';
-import { Database } from '../../lib/database.types';
-import NoteCard from './components/NoteCard';
 import AddIcon from '@mui/icons-material/Add';
 import { useRouter } from 'next/router';
+import Card, { TYPE_CARD } from '../Card/BaseCard';
+import { NoteData } from '../../hooks/useFetchNotes';
 
 type NotesListProps = {
-  notes: Database['public']['Tables']['notes']['Row'][];
+  notes: NoteData[];
 };
 
 export default function NotesList({ notes }: NotesListProps) {
   const router = useRouter();
   return (
     <Stack spacing={1} m={1} sx={{ position: 'relative' }}>
-      {notes && notes.map(note => <NoteCard key={note.id} note={note} />)}
+      {notes &&
+        notes.map(note => (
+          <Card type={TYPE_CARD.NOTE} key={note.id} info={note} />
+        ))}
       <Fab
         sx={{
           position: 'fixed',
