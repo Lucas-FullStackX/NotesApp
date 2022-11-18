@@ -14,7 +14,11 @@ type useInsertPatientResponse = [
   }
 ];
 
-export function useInsertPatient(): useInsertPatientResponse {
+export function useInsertPatient({
+  onComplete
+}: {
+  onComplete?: () => void;
+}): useInsertPatientResponse {
   const [error, setError] = useState<useInsertPatientResponse[1]['error']>();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<useInsertPatientResponse[1]['data']>([]);
@@ -27,6 +31,7 @@ export function useInsertPatient(): useInsertPatientResponse {
       .select();
     if (PatientData && !PatientError) {
       setData(PatientData);
+      onComplete();
     }
     if (PatientError) {
       setError(PatientError);

@@ -26,11 +26,21 @@ import { useCreateNoteForm } from '../../hooks/useCreateNoteForm';
 import { useInsertNote } from '../../hooks/useInsertNote';
 import { formatCreateNoteData } from './notes-utils';
 import { useFetchPatients } from '../../hooks/useFetchPatients';
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
+import { Context } from '../../src/store/Context';
 
 export default function CreateForm(): JSX.Element {
+  const router = useRouter();
+  const { success } = useContext(Context);
   const { register, handleSubmit, watch, setValue } = useCreateNoteForm();
   const { loading: loadingPatients, data: Patients } = useFetchPatients();
-  const [insertNote, { data: insertNoteData }] = useInsertNote();
+  const [insertNote, { data: insertNoteData }] = useInsertNote({
+    onComplete: () => {
+      router.push('/dashboard');
+      success('Nota Creada');
+    }
+  });
   console.log(insertNoteData);
   return (
     <Box

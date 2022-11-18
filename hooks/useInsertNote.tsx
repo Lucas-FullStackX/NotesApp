@@ -14,7 +14,11 @@ type useInsertNoteResponse = [
   }
 ];
 
-export function useInsertNote(): useInsertNoteResponse {
+export function useInsertNote({
+  onComplete
+}: {
+  onComplete?: () => void;
+}): useInsertNoteResponse {
   const [error, setError] = useState<useInsertNoteResponse[1]['error']>();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<useInsertNoteResponse[1]['data']>([]);
@@ -27,6 +31,7 @@ export function useInsertNote(): useInsertNoteResponse {
       .select();
     if (NoteData && !NoteError) {
       setData(NoteData);
+      onComplete();
     }
     if (NoteError) {
       setError(NoteError);

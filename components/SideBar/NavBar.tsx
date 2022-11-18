@@ -67,7 +67,7 @@ export default function NavBar({ children }: { children: JSX.Element }) {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="Buscar..."
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>

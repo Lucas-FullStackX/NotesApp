@@ -43,7 +43,7 @@ export default function Card({ info, type }: CardProps): JSX.Element {
           {info.name}
         </Typography>
         <Typography variant="body1" component="div">
-          <b>Fecha:</b> {humanizeDate(info.created_at ?? '')}
+          {humanizeDate(info.created_at ?? '')}
         </Typography>
       </Paper>
     );

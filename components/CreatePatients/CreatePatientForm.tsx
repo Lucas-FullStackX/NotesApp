@@ -8,10 +8,14 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useCreatePatientForm } from '../../hooks/useCreatePatientForm';
 import { useInsertPatient } from '../../hooks/useInsertPatient';
 import { LoadingButton } from '@mui/lab';
+import { useRouter } from 'next/router';
 
 export default function CreatePatientForm(): JSX.Element {
+  const router = useRouter();
   const { register, handleSubmit } = useCreatePatientForm();
-  const [insertPatient, { data: insertNoteData, loading }] = useInsertPatient();
+  const [insertPatient, { data: insertNoteData, loading }] = useInsertPatient({
+    onComplete: () => router.push('/dashboard')
+  });
   const [value, setValue] = useState<Dayjs | null>(dayjs());
   console.log(insertNoteData);
   return (
@@ -52,9 +56,7 @@ export default function CreatePatientForm(): JSX.Element {
           left: '0'
         }}
       >
-        <Button variant="outlined" href="dashboard" sx={{ gridRow: '' }}>
-          Cancelar
-        </Button>
+        <Button variant="outlined">Cancelar</Button>
         <LoadingButton type="submit" variant="contained" loading={loading}>
           CREAR
         </LoadingButton>
