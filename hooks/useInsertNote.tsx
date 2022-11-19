@@ -5,7 +5,6 @@ import { PostgrestError } from '@supabase/supabase-js';
 
 type useInsertNoteResponse = [
   createNote: (
-    // eslint-disable-next-line no-unused-vars
     info: Database['public']['Tables']['notes']['Insert']
   ) => Promise<void>,
   response: {
@@ -15,7 +14,11 @@ type useInsertNoteResponse = [
   }
 ];
 
-export function useInsertNote(): useInsertNoteResponse {
+export function useInsertNote({
+  onComplete
+}: {
+  onComplete?: () => void;
+}): useInsertNoteResponse {
   const [error, setError] = useState<useInsertNoteResponse[1]['error']>();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<useInsertNoteResponse[1]['data']>([]);
@@ -28,6 +31,7 @@ export function useInsertNote(): useInsertNoteResponse {
       .select();
     if (NoteData && !NoteError) {
       setData(NoteData);
+      onComplete();
     }
     if (NoteError) {
       setError(NoteError);

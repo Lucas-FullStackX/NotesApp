@@ -7,8 +7,9 @@ import { Database } from '../lib/database.types';
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import CreateForm from '../components/CreateNotes/CreateForm';
 import { Box } from '@mui/system';
+import NavBar from '../components/SideBar/NavBar';
 
-const LoginPage: NextPage = () => {
+const CreateNotes: NextPage = () => {
   const { isLoading, session, error } = useSessionContext();
   const supabaseClient = useSupabaseClient<Database>();
 
@@ -27,10 +28,12 @@ const LoginPage: NextPage = () => {
     );
 
   return (
-    <Box m={3}>
-      <CreateForm />
-    </Box>
+    <NavBar>
+      <Box m={3}>
+        <CreateForm />
+      </Box>
+    </NavBar>
   );
 };
 
-export default LoginPage;
+export default CreateNotes;

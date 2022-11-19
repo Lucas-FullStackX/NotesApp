@@ -7,7 +7,10 @@ import {
   Select,
   MenuItem,
   FormControlLabel,
-  Checkbox
+  Checkbox,
+  Autocomplete,
+  CircularProgress,
+  Typography
 } from '@mui/material';
 import {
   SKIN_TYPES,
@@ -22,10 +25,22 @@ import {
 import { useCreateNoteForm } from '../../hooks/useCreateNoteForm';
 import { useInsertNote } from '../../hooks/useInsertNote';
 import { formatCreateNoteData } from './notes-utils';
+import { useFetchPatients } from '../../hooks/useFetchPatients';
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
+import { Context } from '../../src/store/Context';
 
 export default function CreateForm(): JSX.Element {
-  const { register, handleSubmit, watch } = useCreateNoteForm();
-  const [insertNote, { data: insertNoteData }] = useInsertNote();
+  const router = useRouter();
+  const { success } = useContext(Context);
+  const { register, handleSubmit, watch, setValue } = useCreateNoteForm();
+  const { loading: loadingPatients, data: Patients } = useFetchPatients();
+  const [insertNote, { data: insertNoteData }] = useInsertNote({
+    onComplete: () => {
+      router.push('/dashboard');
+      success('Nota Creada');
+    }
+  });
   console.log(insertNoteData);
   return (
     <Box
@@ -39,12 +54,47 @@ export default function CreateForm(): JSX.Element {
         insertNote(newData);
       })}
     >
-      {/* <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
-          <TextField label="Paciente" {...register('')} />
-        </FormControl>
-        <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
-        <TextField label="edad" {...register('password')} />
-      </FormControl> */}
+      <Typography variant="h5" sx={{ gridColumn: 'span 2' }}>
+        Crear Paciente
+      </Typography>
+      <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
+        <Autocomplete
+          isOptionEqualToValue={(option, value) => option.id === value.id}
+          getOptionLabel={option =>
+            typeof option === 'string' ? option : option.name
+          }
+          options={Patients}
+          filterOptions={(options, { inputValue }) =>
+            options.filter(
+              item =>
+                item.name.toLowerCase().indexOf(inputValue.toLowerCase()) >= 0
+            )
+          }
+          onChange={(_event, value) => {
+            setValue(
+              'patient',
+              `${typeof value === 'string' ? value : value.id}`
+            );
+          }}
+          renderInput={params => (
+            <TextField
+              {...params}
+              label="Paciente"
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: (
+                  <>
+                    {loadingPatients ? (
+                      <CircularProgress color="inherit" size={20} />
+                    ) : null}
+                    {params.InputProps.endAdornment}
+                  </>
+                )
+              }}
+            />
+          )}
+        />
+      </FormControl>
       <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
         <InputLabel>Estado General</InputLabel>
         <Select label="Estado General" {...register('general_state')}>
@@ -173,27 +223,6 @@ export default function CreateForm(): JSX.Element {
           ))}
         </Select>
       </FormControl>
-      {/* <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
-          <TextField label="Tension Arterial" {...register('password')} />
-          </FormControl>
-          <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
-          <TextField label="Frecuencia Cardiaca" {...register('password')} />
-          </FormControl>
-          <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
-          <TextField label="Saturacion" {...register('password')} />
-          </FormControl>
-          <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
-          <TextField
-          label="Temperatura"
-          {...register('password')}
-          InputProps={{
-            endAdornment: <InputAdornment position="end">ºC</InputAdornment>
-          }}
-          />
-          </FormControl>
-          <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
-          <TextField label="Novedades" {...register('password')} />
-        </FormControl> */}
       <Button variant="outlined" href="dashboard">
         Cancelar
       </Button>

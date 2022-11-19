@@ -36,10 +36,10 @@ module.exports = {
     'space-before-function-paren': 'off',
     'react/prop-types': 'off',
     'no-use-before-define': 'off',
-    'no-unused-vars': [
-      'error',
-      { vars: 'all', args: 'after-used', ignoreRestSiblings: false }
-    ],
+
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
+
     '@typescript-eslint/no-use-before-define': 'off',
     semi: ['error', 'always'],
     '@typescript-eslint/semi': 'error'

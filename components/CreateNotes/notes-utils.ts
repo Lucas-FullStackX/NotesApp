@@ -5,6 +5,7 @@ export const formatCreateNoteData = (
   data: NoteFormType
 ): Database['public']['Tables']['notes']['Insert'] => {
   const dataFormatted: Database['public']['Tables']['notes']['Insert'] = {
+    patient: Number(data.patient),
     general_state: data.general_state,
     anemic_state: data.anemic_state,
     deposition: data.depositionBool ? data.deposition : null,
