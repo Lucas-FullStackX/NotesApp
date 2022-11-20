@@ -3,8 +3,9 @@ import { Paper, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { humanizeDate } from '../../src/utils';
 import { Database } from '../../lib/database.types';
-import { NoteData } from '../../hooks/useFetchNotes';
+
 import { StatusChip } from '../Chip/StatusChips';
+import { NoteData } from '../../hooks/useSearchData';
 
 export enum TYPE_CARD {
   NOTE = 'NOTE',
