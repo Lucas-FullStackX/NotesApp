@@ -11,7 +11,8 @@ import {
   Autocomplete,
   CircularProgress,
   Typography,
-  InputAdornment
+  InputAdornment,
+  FormHelperText
 } from '@mui/material';
 import {
   SKIN_TYPES,
@@ -37,7 +38,8 @@ export default function CreateForm(): JSX.Element {
   const { success } = useContext(Context);
   const [open, setOpen] = useState<boolean>(false);
   const [image, setImage] = useState<string>('');
-  const { register, handleSubmit, watch, setValue } = useCreateNoteForm();
+  const { register, handleSubmit, watch, setValue, formState } =
+    useCreateNoteForm();
   const { loading: loadingPatients, data: Patients } = useFetchPatients();
   const [insertNote, { data: insertNoteData }] = useInsertNote({
     onComplete: () => {
@@ -92,6 +94,8 @@ export default function CreateForm(): JSX.Element {
             <TextField
               {...params}
               label="Paciente"
+              helperText={formState.errors?.patient?.message}
+              error={Boolean(formState.errors?.patient?.message)}
               InputProps={{
                 ...params.InputProps,
                 endAdornment: (
@@ -109,23 +113,37 @@ export default function CreateForm(): JSX.Element {
       </FormControl>
       <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
         <InputLabel>Estado General</InputLabel>
-        <Select label="Estado General" {...register('general_state')}>
+        <Select
+          label="Estado General"
+          {...register('general_state')}
+          error={Boolean(formState.errors?.general_state?.message)}
+        >
           {STATES.map(state => (
             <MenuItem key={state} value={state}>
               {state}
             </MenuItem>
           ))}
         </Select>
+        <FormHelperText error>
+          {formState.errors?.general_state?.message}
+        </FormHelperText>
       </FormControl>
       <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
         <InputLabel>Estado Animico</InputLabel>
-        <Select label="Estado Animico" {...register('anemic_state')}>
+        <Select
+          label="Estado Animico"
+          {...register('anemic_state')}
+          error={Boolean(formState.errors?.anemic_state?.message)}
+        >
           {ANEMIC_STATUS.map(state => (
             <MenuItem key={state} value={state}>
               {state}
             </MenuItem>
           ))}
         </Select>
+        <FormHelperText error>
+          {formState.errors?.anemic_state?.message}
+        </FormHelperText>
       </FormControl>
       <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
         <InputLabel>Piel</InputLabel>
@@ -263,6 +281,8 @@ export default function CreateForm(): JSX.Element {
         <TextField
           type="number"
           label="Tension Arterial"
+          helperText={formState.errors?.sanguine_pressure?.message}
+          error={Boolean(formState.errors?.sanguine_pressure?.message)}
           {...register('sanguine_pressure')}
           InputProps={{
             inputMode: 'numeric'
