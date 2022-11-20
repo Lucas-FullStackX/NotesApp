@@ -1,6 +1,7 @@
 import { Box, Paper, Stack, Typography } from '@mui/material';
 import { NoteData } from '../../hooks/useDetailNote';
 import { humanizeDate } from '../../src/utils';
+// import { getImageURL } from '../../src/utils/index';
 
 export default function DetailNote({ data }: { data: NoteData }): JSX.Element {
   console.log(data);
@@ -155,8 +156,13 @@ export default function DetailNote({ data }: { data: NoteData }): JSX.Element {
           m: 2
         }}
       >
-        Firma del paciente: ____________________
+        Firma del paciente:
       </Typography>
+      {data?.assistant && (
+        <Box>
+          <img src={data?.assistant} alt="asssistente" />
+        </Box>
+      )}
     </Box>
   );
 }

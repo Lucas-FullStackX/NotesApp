@@ -50,7 +50,7 @@ export function useDetailNote({ id }): useFetchNotesResponse {
         sleep,
         assistant,
         created_by,
-        vital_signs(
+        sings:vital_signs(
           id,
           created_at,
           sanguine_pressure,
@@ -72,7 +72,16 @@ export function useDetailNote({ id }): useFetchNotesResponse {
         setError(notesError);
       }
       if (notesData) {
-        setData(notesData[0]);
+        if (notesData[0].assistant.length > 0) {
+          const { data: ImgData, error: imgError } =
+            await supabaseClient.storage
+              .from('store')
+              .download(notesData[0].assistant);
+          console.log(ImgData, imgError);
+          setData({ ...notesData[0] });
+        } else {
+          setData(notesData[0]);
+        }
       }
       setLoading(false);
     }

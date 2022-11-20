@@ -16,7 +16,7 @@ export const ROUTES: {
   route: string;
   icon: ReactNode;
 }[] = [
-  { routeName: 'Notas', route: '/dashboard', icon: <TextSnippetIcon /> },
+  { routeName: 'Notas', route: '/notes', icon: <TextSnippetIcon /> },
   { routeName: 'Pacientes', route: '/patients', icon: <TextSnippetIcon /> }
 ];
 
