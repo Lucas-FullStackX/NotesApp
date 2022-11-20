@@ -11,7 +11,7 @@ import {
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import { useRouter } from 'next/router';
 
-const ROUTES: {
+export const ROUTES: {
   routeName: string;
   route: string;
   icon: ReactNode;

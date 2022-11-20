@@ -18,7 +18,7 @@ const LoginPage: NextPage = () => {
   useEffect(() => {
     async function redirect() {
       if (session) {
-        router.push('/dashboard');
+        router.push('/notes');
       }
     }
 
