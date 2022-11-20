@@ -1,16 +1,22 @@
 import { Box, Paper, Stack, Typography } from '@mui/material';
-import { Database } from '../../lib/database.types';
+import { NoteData } from '../../hooks/useDetailNote';
 import { humanizeDate } from '../../src/utils';
 
-export default function DetailNote({
-  data
-}: {
-  data: Database['public']['Tables']['notes']['Row'];
-}): JSX.Element {
+export default function DetailNote({ data }: { data: NoteData }): JSX.Element {
+  console.log(data);
   return (
     <Box>
-      <Typography variant="h5" component="div" fontWeight="bold">
-        Informacion
+      <Typography
+        variant="h5"
+        component="div"
+        fontWeight="bold"
+        sx={{
+          m: 2
+        }}
+      >
+        {Array.isArray(data?.patient)
+          ? data?.patient[0].name
+          : data?.patient?.name ?? 'Sin Paciente'}
       </Typography>
       <Paper
         sx={{
@@ -101,14 +107,6 @@ export default function DetailNote({
           </Box>
           <Box>
             <Typography variant="h6" component="div" fontWeight={400}>
-              Paciente
-            </Typography>
-            <Typography variant="body1" color="text.secondary">
-              {data?.patient ?? ''}
-            </Typography>
-          </Box>
-          <Box>
-            <Typography variant="h6" component="div" fontWeight={400}>
               Protesis
             </Typography>
             <Typography variant="body1" color="text.secondary">
@@ -144,8 +142,21 @@ export default function DetailNote({
           <Typography variant="h6" component="div" fontWeight={700}>
             Signos Vitales
           </Typography>
+          <Typography variant="body1" color="text.secondary">
+            a
+          </Typography>
         </Box>
       </Paper>
+      <Typography
+        variant="h6"
+        component="div"
+        fontWeight={700}
+        sx={{
+          m: 2
+        }}
+      >
+        Firma del paciente: ____________________
+      </Typography>
     </Box>
   );
 }

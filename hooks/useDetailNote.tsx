@@ -10,10 +10,13 @@ export type NoteData = Overwrite<
     patient:
       | Database['public']['Tables']['patient']['Row'][]
       | Database['public']['Tables']['patient']['Row'];
+    signs?:
+      | Database['public']['Tables']['vital_signs']['Row'][]
+      | Database['public']['Tables']['vital_signs']['Row'];
   }
 >;
 type useFetchNotesResponse = {
-  data: Database['public']['Tables']['notes']['Row'];
+  data: NoteData;
   error?: PostgrestError;
   loading: boolean;
 };
@@ -29,7 +32,41 @@ export function useDetailNote({ id }): useFetchNotesResponse {
       setLoading(true);
       const { error: notesError, data: notesData } = await supabaseClient
         .from('notes')
-        .select('*')
+        .select(
+          `id,
+        created_at,
+        general_state,
+        anemic_state,
+        skin,
+        emesis,
+        prosthesis,
+        medicines,
+        wandering,
+        falls,
+        deposition,
+        dieresis,
+        food,
+        news,
+        sleep,
+        assistant,
+        created_by,
+        vital_signs(
+          id,
+          created_at,
+          sanguine_pressure,
+          cardiac_frequency,
+          saturation,
+          temperature,
+          news
+        ),
+        code,
+        patient(
+          id,
+          created_at,
+          name,
+          date_of_birth
+        )`
+        )
         .eq('id', id);
       if (notesError) {
         setError(notesError);
