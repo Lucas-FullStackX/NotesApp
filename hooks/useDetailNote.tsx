@@ -13,7 +13,7 @@ export type NoteData = Overwrite<
   }
 >;
 type useFetchNotesResponse = {
-  data: Database['public']['Tables']['patient']['Row'];
+  data: Database['public']['Tables']['notes']['Row'];
   error?: PostgrestError;
   loading: boolean;
 };
