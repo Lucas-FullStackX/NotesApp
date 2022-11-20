@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { PostgrestError } from '@supabase/supabase-js';
 
 type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
-export type NoteData = Overwrite<
+export type NoteDetailType = Overwrite<
   Database['public']['Tables']['notes']['Row'],
   {
     patient:
@@ -16,7 +16,7 @@ export type NoteData = Overwrite<
   }
 >;
 type useFetchNotesResponse = {
-  data: NoteData;
+  data: NoteDetailType;
   error?: PostgrestError;
   loading: boolean;
 };
@@ -73,12 +73,10 @@ export function useDetailNote({ id }): useFetchNotesResponse {
       }
       if (notesData) {
         if (notesData[0].assistant.length > 0) {
-          const { data: ImgData, error: imgError } =
-            await supabaseClient.storage
-              .from('store')
-              .download(notesData[0].assistant);
-          console.log(ImgData, imgError);
-          setData({ ...notesData[0] });
+          const { data: ImgData } = supabaseClient.storage
+            .from('store')
+            .getPublicUrl(notesData[0].assistant);
+          setData({ ...notesData[0], assistant: ImgData.publicUrl });
         } else {
           setData(notesData[0]);
         }

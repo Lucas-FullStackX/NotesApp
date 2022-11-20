@@ -1,9 +1,13 @@
 import { Box, Paper, Stack, Typography } from '@mui/material';
-import { NoteData } from '../../hooks/useDetailNote';
+import { NoteDetailType } from '../../hooks/useDetailNote';
 import { humanizeDate } from '../../src/utils';
 // import { getImageURL } from '../../src/utils/index';
 
-export default function DetailNote({ data }: { data: NoteData }): JSX.Element {
+export default function DetailNote({
+  data
+}: {
+  data: NoteDetailType;
+}): JSX.Element {
   console.log(data);
   return (
     <Box>
