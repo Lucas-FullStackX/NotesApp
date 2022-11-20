@@ -27,12 +27,15 @@ import { useInsertNote } from '../../hooks/useInsertNote';
 import { formatCreateNoteData } from './notes-utils';
 import { useFetchPatients } from '../../hooks/useFetchPatients';
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Context } from '../../src/store/Context';
+import { SignatureMenu } from './components/SignatureModal';
 
 export default function CreateForm(): JSX.Element {
   const router = useRouter();
   const { success } = useContext(Context);
+  const [open, setOpen] = useState<boolean>(false);
+  const [image, setImage] = useState<string>('');
   const { register, handleSubmit, watch, setValue } = useCreateNoteForm();
   const { loading: loadingPatients, data: Patients } = useFetchPatients();
   const [insertNote, { data: insertNoteData }] = useInsertNote({
@@ -54,6 +57,14 @@ export default function CreateForm(): JSX.Element {
         insertNote(newData);
       })}
     >
+      <SignatureMenu
+        open={open}
+        close={() => setOpen(false)}
+        onChange={(assistant, base) => {
+          setImage(base);
+          setValue('assistant', assistant);
+        }}
+      />
       <Typography variant="h5" sx={{ gridColumn: 'span 2' }}>
         Crear Paciente
       </Typography>
@@ -223,6 +234,27 @@ export default function CreateForm(): JSX.Element {
           ))}
         </Select>
       </FormControl>
+      <Typography variant="h5" sx={{ gridColumn: 'span 2' }}>
+        Asistente
+      </Typography>
+      <Button
+        variant="text"
+        sx={{ gridColumn: 'span 2' }}
+        onClick={() => setOpen(true)}
+      >
+        {image.length ? 'Editar' : 'Firma'}
+      </Button>
+      {image.length > 0 && (
+        <Box
+          sx={{
+            gridColumn: 'span 2',
+            display: 'flex',
+            justifyContent: 'center'
+          }}
+        >
+          <img src={image} alt="assistant" />
+        </Box>
+      )}
       <Button variant="outlined" href="dashboard">
         Cancelar
       </Button>

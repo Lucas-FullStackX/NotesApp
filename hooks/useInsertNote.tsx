@@ -2,6 +2,7 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { Database } from '../lib/database.types';
 import { useState } from 'react';
 import { PostgrestError } from '@supabase/supabase-js';
+import dayjs from 'dayjs';
 
 type useInsertNoteResponse = [
   createNote: (
@@ -25,6 +26,18 @@ export function useInsertNote({
   const supabaseClient = useSupabaseClient<Database>();
   const createNote: useInsertNoteResponse[0] = async info => {
     setLoading(true);
+    const { data: SignatureData, error: SignatureError } =
+      await supabaseClient.storage
+        .from('store')
+        .upload(
+          `signature/${info.patient}${info.general_state}${dayjs()}.png`,
+          info.assistant,
+          {
+            cacheControl: '3600',
+            upsert: false
+          }
+        );
+    console.log(SignatureData, SignatureError);
     const { error: NoteError, data: NoteData } = await supabaseClient
       .from('notes')
       .insert(info)

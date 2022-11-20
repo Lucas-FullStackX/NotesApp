@@ -33,7 +33,7 @@ export const NOTE_FORM_VALIDATOR_SCHEMA = yup
     food: yup.boolean(),
     news: yup.string(),
     sleep: yup.string(),
-    assistant: yup.string()
+    assistant: yup.mixed()
   })
   .required();
 export type NoteFormType = typeof NOTE_FORM_VALIDATOR_SCHEMA['__outputType'];
