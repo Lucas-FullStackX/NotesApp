@@ -16,9 +16,9 @@ export const SLEEP_TYPES = ['24h', 'Dia', 'Noche'];
 
 export const NOTE_FORM_VALIDATOR_SCHEMA = yup
   .object({
-    patient: yup.string().required(),
-    general_state: yup.string().required(),
-    anemic_state: yup.string().required(),
+    patient: yup.string().required('El Paciente es obligatorio'),
+    general_state: yup.string().required('El Estado General es obligatorio'),
+    anemic_state: yup.string().required('El Estado Anemico es obligatorio'),
     skin: yup.string(),
     emesis: yup.boolean(),
     prosthesis: yup.boolean(),
@@ -33,7 +33,15 @@ export const NOTE_FORM_VALIDATOR_SCHEMA = yup
     food: yup.boolean(),
     news: yup.string(),
     sleep: yup.string(),
-    assistant: yup.string()
+    assistant: yup.mixed(),
+    sanguine_pressure: yup
+      .number()
+      .typeError('Debe ser un numero')
+      .required('Requerido'),
+    cardiac_frequency: yup.number(),
+    saturation: yup.number(),
+    temperature: yup.number(),
+    SNews: yup.string()
   })
   .required();
 export type NoteFormType = typeof NOTE_FORM_VALIDATOR_SCHEMA['__outputType'];

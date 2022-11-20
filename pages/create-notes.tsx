@@ -13,7 +13,6 @@ const CreateNotes: NextPage = () => {
   const { isLoading, session, error } = useSessionContext();
   const supabaseClient = useSupabaseClient<Database>();
 
-  console.log(session);
   if (!session)
     return (
       <>

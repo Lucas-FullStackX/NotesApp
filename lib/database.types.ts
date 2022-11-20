@@ -30,6 +30,7 @@ export interface Database {
           signs: number | null;
           code: number | null;
           patient: number | null;
+          created_by: string | null;
         };
         Insert: {
           id?: number;
@@ -51,6 +52,7 @@ export interface Database {
           signs?: number | null;
           code?: number | null;
           patient?: number | null;
+          created_by?: string | null;
         };
         Update: {
           id?: number;
@@ -72,6 +74,7 @@ export interface Database {
           signs?: number | null;
           code?: number | null;
           patient?: number | null;
+          created_by?: string | null;
         };
       };
       patient: {
@@ -94,31 +97,51 @@ export interface Database {
           date_of_birth?: string | null;
         };
       };
-      'vitalis signa': {
+      user_roles: {
         Row: {
           id: number;
           created_at: string | null;
-          sanguinem_pressura: number | null;
-          ratus_cordis: number | null;
-          satietatem: number | null;
+          user: string | null;
+          role: string | null;
+        };
+        Insert: {
+          id?: number;
+          created_at?: string | null;
+          user?: string | null;
+          role?: string | null;
+        };
+        Update: {
+          id?: number;
+          created_at?: string | null;
+          user?: string | null;
+          role?: string | null;
+        };
+      };
+      vital_signs: {
+        Row: {
+          id: number;
+          created_at: string | null;
+          sanguine_pressure: number | null;
+          cardiac_frequency: number | null;
+          saturation: number | null;
           temperature: number | null;
           news: string | null;
         };
         Insert: {
           id?: number;
           created_at?: string | null;
-          sanguinem_pressura?: number | null;
-          ratus_cordis?: number | null;
-          satietatem?: number | null;
+          sanguine_pressure?: number | null;
+          cardiac_frequency?: number | null;
+          saturation?: number | null;
           temperature?: number | null;
           news?: string | null;
         };
         Update: {
           id?: number;
           created_at?: string | null;
-          sanguinem_pressura?: number | null;
-          ratus_cordis?: number | null;
-          satietatem?: number | null;
+          sanguine_pressure?: number | null;
+          cardiac_frequency?: number | null;
+          saturation?: number | null;
           temperature?: number | null;
           news?: string | null;
         };
