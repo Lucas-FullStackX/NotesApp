@@ -48,6 +48,7 @@ export function useFetchNotes(): useFetchNotesResponse {
           assistant,
           signs,
           code,
+          created_by,
           patient(
             id,
             created_at,
