@@ -10,7 +10,8 @@ import {
   Checkbox,
   Autocomplete,
   CircularProgress,
-  Typography
+  Typography,
+  InputAdornment
 } from '@mui/material';
 import {
   SKIN_TYPES,
@@ -255,6 +256,53 @@ export default function CreateForm(): JSX.Element {
           <img src={image} alt="assistant" />
         </Box>
       )}
+      <Typography variant="h5" sx={{ gridColumn: 'span 2' }}>
+        Signos Vitales
+      </Typography>
+      <FormControl fullWidth>
+        <TextField
+          type="number"
+          label="Tension Arterial"
+          {...register('sanguine_pressure')}
+          InputProps={{
+            inputMode: 'numeric'
+          }}
+        />
+      </FormControl>
+      <FormControl fullWidth>
+        <TextField
+          type="number"
+          label="Frecuencia Cardiaca"
+          {...register('cardiac_frequency')}
+          InputProps={{
+            inputMode: 'numeric'
+          }}
+        />
+      </FormControl>
+      <FormControl fullWidth>
+        <TextField
+          label="Saturacion"
+          type="number"
+          {...register('saturation')}
+          InputProps={{
+            inputMode: 'numeric'
+          }}
+        />
+      </FormControl>
+      <FormControl fullWidth>
+        <TextField
+          label="Temperatura"
+          type="number"
+          {...register('temperature')}
+          InputProps={{
+            inputMode: 'numeric',
+            endAdornment: <InputAdornment position="end">°C</InputAdornment>
+          }}
+        />
+      </FormControl>
+      <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
+        <TextField label="Novedades" {...register('SNews')} />
+      </FormControl>
       <Button variant="outlined" href="dashboard">
         Cancelar
       </Button>

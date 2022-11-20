@@ -62,6 +62,7 @@ export function useSearchDataNotes(): useSearchDataResponse {
           assistant,
           signs,
           code,
+          created_by,
           patient(
             id,
             created_at,
