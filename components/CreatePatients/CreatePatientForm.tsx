@@ -23,7 +23,6 @@ export default function CreatePatientForm(): JSX.Element {
       component="form"
       autoComplete="off"
       onSubmit={handleSubmit(data => {
-        console.log(data);
         insertPatient({ ...data, date_of_birth: dayjs(value).toString() });
       })}
     >

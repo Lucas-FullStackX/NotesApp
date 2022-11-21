@@ -69,7 +69,7 @@ export default function CreateForm(): JSX.Element {
         }}
       />
       <Typography variant="h5" sx={{ gridColumn: 'span 2' }}>
-        Crear Paciente
+        Crear Nota
       </Typography>
       <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
         <Autocomplete
