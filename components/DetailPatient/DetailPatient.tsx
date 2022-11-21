@@ -31,7 +31,7 @@ export default function DetailPatient({
               Edad
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              {data[0]?.date_of_birth ?? ''}
+              {data[0]?.age ?? ''}
             </Typography>
             <Typography variant="h6" component="div" fontWeight={400}>
               Notas
