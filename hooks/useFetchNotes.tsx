@@ -53,7 +53,8 @@ export function useFetchNotes(): useFetchNotesResponse {
             id,
             created_at,
             name,
-            date_of_birth
+            date_of_birth,
+            age
           )`
         )
         .order('created_at', { ascending: false });
