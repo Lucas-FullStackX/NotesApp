@@ -29,7 +29,7 @@ export default function Card({ info, type }: CardProps): JSX.Element {
     return (
       <Paper
         onClick={() => {
-          router.push(`/note/${info.id}`);
+          router.push(`/patient/${info.id}`);
         }}
         sx={{ p: 2 }}
         elevation={elevation}

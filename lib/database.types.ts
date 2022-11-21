@@ -83,18 +83,21 @@ export interface Database {
           created_at: string | null;
           name: string;
           date_of_birth: string | null;
+          age: number | null;
         };
         Insert: {
           id?: number;
           created_at?: string | null;
           name: string;
           date_of_birth?: string | null;
+          age?: number | null;
         };
         Update: {
           id?: number;
           created_at?: string | null;
           name?: string;
           date_of_birth?: string | null;
+          age?: number | null;
         };
       };
       user_roles: {

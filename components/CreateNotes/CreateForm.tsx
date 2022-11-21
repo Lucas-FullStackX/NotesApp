@@ -44,7 +44,7 @@ export default function CreateForm(): JSX.Element {
   const { loading: loadingPatients, data: Patients } = useFetchPatients();
   const [insertNote, { data: insertNoteData }] = useInsertNote({
     onComplete: () => {
-      router.push('/dashboard');
+      router.push('/notes');
       success('Nota Creada');
     }
   });

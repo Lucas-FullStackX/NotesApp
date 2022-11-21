@@ -11,13 +11,24 @@ import {
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import { useRouter } from 'next/router';
 
-const ROUTES: {
+export const ROUTES: {
   routeName: string;
   route: string;
+  name: string;
   icon: ReactNode;
 }[] = [
-  { routeName: 'Notas', route: '/dashboard', icon: <TextSnippetIcon /> },
-  { routeName: 'Pacientes', route: '/patients', icon: <TextSnippetIcon /> }
+  {
+    routeName: 'Notas',
+    route: '/notes',
+    icon: <TextSnippetIcon />,
+    name: 'Nota'
+  },
+  {
+    routeName: 'Pacientes',
+    route: '/patients',
+    icon: <TextSnippetIcon />,
+    name: 'Paciente'
+  }
 ];
 
 export default function SideBar(
