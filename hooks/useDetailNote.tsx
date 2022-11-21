@@ -50,7 +50,7 @@ export function useDetailNote({ id }): useFetchNotesResponse {
         sleep,
         assistant,
         created_by,
-        sings:vital_signs(
+        signs:vital_signs(
           id,
           created_at,
           sanguine_pressure,
