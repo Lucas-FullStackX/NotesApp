@@ -1,4 +1,11 @@
-import { Page, Text, View, Document, StyleSheet } from '@react-18-pdf/renderer';
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+  Image
+} from '@react-pdf/renderer';
 import { NoteData } from '../../hooks/useSearchData';
 import { humanizeDate } from '../../src/utils';
 
@@ -50,8 +57,7 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     fontSize: 12,
-    color: 'white',
-    backgroundColor: 'grey'
+    color: 'white'
   },
   content: {
     fontSize: 10,
@@ -82,7 +88,7 @@ export default function PDFComponent({ data }: PdfComponentProps): JSX.Element {
       <Page size="A4" style={styles.page}>
         <View
           style={[
-            { backgroundColor: '#5EB2CF', width: '100%', height: 200 },
+            { backgroundColor: '#009688', width: '100%', height: 150 },
             styles.PerfectCenter,
             styles.Column
           ]}
@@ -101,7 +107,7 @@ export default function PDFComponent({ data }: PdfComponentProps): JSX.Element {
               styles.Row,
               styles.VerticalCenter,
               {
-                backgroundColor: 'grey',
+                backgroundColor: '#009688',
                 width: '100%',
                 height: 20,
                 marginLeft: 10,
@@ -151,7 +157,7 @@ export default function PDFComponent({ data }: PdfComponentProps): JSX.Element {
               styles.Row,
               styles.VerticalCenter,
               {
-                backgroundColor: 'grey',
+                backgroundColor: '#009688',
                 width: '100%',
                 height: 20,
                 marginLeft: 10,
@@ -190,9 +196,17 @@ export default function PDFComponent({ data }: PdfComponentProps): JSX.Element {
             </View>
             <View style={[styles.Column, { width: '25%' }]}>
               <Text style={styles.content}>{data?.falls ? 'SI' : 'NO'}</Text>
+              {data?.falls && data?.falls.length > 0 && (
+                <Text style={styles.content}>{data?.falls}</Text>
+              )}
             </View>
             <View style={[styles.Column, { width: '25%' }]}>
-              <Text style={styles.content}>{data.deposition}</Text>
+              <Text style={styles.content}>
+                {data?.deposition ? 'SI' : 'NO'}
+              </Text>
+              {data?.deposition && data?.deposition.length > 0 && (
+                <Text style={styles.content}>{data?.deposition}</Text>
+              )}
             </View>
           </View>
 
@@ -201,7 +215,7 @@ export default function PDFComponent({ data }: PdfComponentProps): JSX.Element {
               styles.Row,
               styles.VerticalCenter,
               {
-                backgroundColor: 'grey',
+                backgroundColor: '#009688',
                 width: '100%',
                 height: 20,
                 marginLeft: 10,
@@ -232,7 +246,10 @@ export default function PDFComponent({ data }: PdfComponentProps): JSX.Element {
             ]}
           >
             <View style={[styles.Column, { width: '25%' }]}>
-              <Text style={styles.content}>{data.dieresis}</Text>
+              <Text style={styles.content}>{data.dieresis ? 'SI' : 'NO'}</Text>
+              {data.dieresis && data.dieresis.length > 0 && (
+                <Text style={styles.content}>{data.dieresis}</Text>
+              )}
             </View>
             <View style={[styles.Column, { width: '25%' }]}>
               <Text style={styles.content}>{data?.emesis}</Text>
@@ -251,7 +268,7 @@ export default function PDFComponent({ data }: PdfComponentProps): JSX.Element {
               styles.Row,
               styles.VerticalCenter,
               {
-                backgroundColor: 'grey',
+                backgroundColor: '#009688',
                 width: '100%',
                 height: 20,
                 marginLeft: 10,
@@ -286,7 +303,7 @@ export default function PDFComponent({ data }: PdfComponentProps): JSX.Element {
               styles.Row,
               styles.VerticalCenter,
               {
-                backgroundColor: 'grey',
+                backgroundColor: '#009688',
                 width: '100%',
                 height: 20,
                 marginLeft: 10,
@@ -296,10 +313,10 @@ export default function PDFComponent({ data }: PdfComponentProps): JSX.Element {
               }
             ]}
           >
-            <View style={[styles.Column, { width: '25%' }]}>
+            <View style={[styles.Column, { width: '50%' }]}>
               <Text style={styles.subTitle}>Medicamentos</Text>
             </View>
-            <View style={[styles.Column, { width: '25%' }]}>
+            <View style={[styles.Column, { width: '50%' }]}>
               <Text style={styles.subTitle}>Patron de Sueño</Text>
             </View>
           </View>
@@ -321,7 +338,7 @@ export default function PDFComponent({ data }: PdfComponentProps): JSX.Element {
               styles.Row,
               styles.VerticalCenter,
               {
-                backgroundColor: 'grey',
+                backgroundColor: '#009688',
                 width: '100%',
                 height: 20,
                 marginLeft: 10,
@@ -332,16 +349,113 @@ export default function PDFComponent({ data }: PdfComponentProps): JSX.Element {
             ]}
           >
             <View style={[styles.Column, { width: '25%' }]}>
-              <Text style={styles.subTitle}>#</Text>
+              <Text style={styles.subTitle}>Tension Arterial</Text>
             </View>
             <View style={[styles.Column, { width: '25%' }]}>
-              <Text style={styles.subTitle}>Type Clock</Text>
+              <Text style={styles.subTitle}>Frecuencia Cardiaca</Text>
             </View>
             <View style={[styles.Column, { width: '25%' }]}>
-              <Text style={styles.subTitle}>Fieldworker</Text>
+              <Text style={styles.subTitle}>Saturacion</Text>
             </View>
             <View style={[styles.Column, { width: '25%' }]}>
-              <Text style={styles.subTitle}>Time</Text>
+              <Text style={styles.subTitle}>Temperatura</Text>
+            </View>
+            {/* <View
+              style={[
+                styles.Row,
+                styles.VerticalCenter,
+                { width: '100%', padding: 10 }
+              ]}
+            >
+              <View style={[styles.Column, { width: '25%' }]}>
+                <Text style={styles.content}>
+                  {data.signs.sanguine_pressure}
+                </Text>
+              </View>
+              <View style={[styles.Column, { width: '25%' }]}>
+                <Text style={styles.content}>
+                  {data?.signs.cardiac_frequency}
+                </Text>
+              </View>
+              <View style={[styles.Column, { width: '25%' }]}>
+                <Text style={styles.content}> {data.signs.saturation}</Text>
+              </View>
+              <View style={[styles.Column, { width: '25%' }]}>
+                <Text style={styles.content}>{data.signs.temperature}ºC</Text>
+              </View>
+            </View> */}
+            {/* <View
+              style={[
+                styles.Row,
+                styles.VerticalCenter,
+                {
+                  backgroundColor: '#009688',
+                  width: '100%',
+                  height: 20,
+                  marginLeft: 10,
+                  marginRight: 10,
+                  marginBottom: 2,
+                  marginTop: 10,
+                  padding: 2
+                }
+              ]}
+            >
+              <View style={[styles.Column, { width: '100%' }]}>
+                <Text style={styles.subTitle}>Novedades</Text>
+              </View>
+            </View>
+            <View
+              style={[
+                styles.Row,
+                styles.VerticalCenter,
+                styles.Wrap,
+                { width: '100%', padding: 10 }
+              ]}
+            >
+              <View style={[styles.Column, { width: '100%' }]}>
+                <Text style={[styles.content, { textAlign: 'justify' }]}>
+                  {data?.signs.news}
+                  </Text>
+                  </View>
+                </View> */}
+          </View>
+          <View
+            style={[
+              styles.Row,
+              styles.VerticalCenter,
+              {
+                backgroundColor: '#009688',
+                width: '100%',
+                height: 20,
+                marginLeft: 10,
+                marginRight: 10,
+                marginBottom: 2,
+                marginTop: 10,
+                padding: 2
+              }
+            ]}
+          >
+            <View style={[styles.Column, { width: '100%' }]}>
+              <Text style={styles.subTitle}>Novedades</Text>
+            </View>
+          </View>
+          <View
+            style={[
+              styles.Row,
+              styles.VerticalCenter,
+              styles.Wrap,
+              { width: '100%', padding: 10 }
+            ]}
+          ></View>
+          <View style={[{ padding: 5 }, styles.Row, styles.Wrap]}>
+            <View style={{ width: '100%', padding: 10 }}>
+              <Text style={styles.title}>Asistente</Text>
+            </View>
+            <View style={[styles.Column, { width: '100%', padding: 2 }]}>
+              <Image
+                style={{ width: 60, height: 60 }}
+                source={data?.assistant ?? data?.assistant ?? ' '}
+              />
             </View>
           </View>
         </View>

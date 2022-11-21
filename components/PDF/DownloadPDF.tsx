@@ -1,4 +1,4 @@
-import { PDFDownloadLink } from '@react-18-pdf/renderer';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import { NoteData } from '../../hooks/useSearchData';
 import PDFComponent from './PDFComponent';
 
