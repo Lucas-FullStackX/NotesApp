@@ -70,14 +70,11 @@ export default function CreatePatientForm(): JSX.Element {
       <Box
         display="grid"
         justifyContent="space-between"
-        p={3}
+        pt={3}
+        pb={3}
         sx={{
           width: '100%',
           gridTemplateColumns: '47% 47%',
-          position: 'absolute',
-          bottom: '0',
-          left: '0',
-          zIndex: 3,
           backgroundColor: 'white'
         }}
       >
