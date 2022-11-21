@@ -141,8 +141,8 @@ export default function PDFComponent({ data }: PdfComponentProps): JSX.Element {
             <View style={[styles.Column, { width: '25%' }]}>
               <Text style={styles.content}>
                 {Array.isArray(data?.patient)
-                  ? data?.patient[0].date_of_birth
-                  : data?.patient?.date_of_birth}
+                  ? data?.patient[0].age
+                  : data?.patient?.age}
               </Text>
             </View>
             <View style={[styles.Column, { width: '25%' }]}>
