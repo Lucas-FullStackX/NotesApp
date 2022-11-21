@@ -30,6 +30,7 @@ export default function MyApp(props: MyAppProps) {
     >
       <CacheProvider value={emotionCache}>
         <Head>
+          <title>Reverde Ser</title>
           <meta name="viewport" content="initial-scale=1, width=device-width" />
         </Head>
         <AppProvider>
