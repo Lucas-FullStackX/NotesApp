@@ -2,7 +2,7 @@ import { Stack, Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useRouter } from 'next/router';
 import Card, { TYPE_CARD } from '../Card/BaseCard';
-import { NoteData } from '../../hooks/useFetchNotes';
+import { NoteData } from '../../hooks/useSearchData';
 
 type NotesListProps = {
   notes: NoteData[];

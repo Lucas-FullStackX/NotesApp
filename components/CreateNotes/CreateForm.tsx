@@ -32,6 +32,7 @@ import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { Context } from '../../src/store/Context';
 import { SignatureMenu } from './components/SignatureModal';
+import Image from 'next/image';
 
 export default function CreateForm(): JSX.Element {
   const router = useRouter();
@@ -69,8 +70,17 @@ export default function CreateForm(): JSX.Element {
         }}
       />
       <Typography variant="h5" sx={{ gridColumn: 'span 2' }}>
-        Crear Paciente
+        Crear Nota
       </Typography>
+      <Box sx={{ gridColumn: 'span 2' }}>
+        <Image
+          src="/img/note.png"
+          alt="login"
+          width={500}
+          height={300}
+          objectFit="contain"
+        />
+      </Box>
       <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
         <Autocomplete
           isOptionEqualToValue={(option, value) => option.id === value.id}
