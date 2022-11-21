@@ -81,7 +81,9 @@ export default function CreatePatientForm(): JSX.Element {
           backgroundColor: 'white'
         }}
       >
-        <Button variant="outlined">Cancelar</Button>
+        <Button variant="outlined" href="patients">
+          Cancelar
+        </Button>
         <LoadingButton type="submit" variant="contained" loading={loading}>
           CREAR
         </LoadingButton>
