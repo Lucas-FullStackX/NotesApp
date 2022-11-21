@@ -333,7 +333,7 @@ export default function CreateForm(): JSX.Element {
       <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
         <TextField label="Novedades" {...register('SNews')} />
       </FormControl>
-      <Button variant="outlined" href="dashboard">
+      <Button variant="outlined" href="notes">
         Cancelar
       </Button>
       <Button type="submit" variant="contained">

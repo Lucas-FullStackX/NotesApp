@@ -42,12 +42,12 @@ export default function CreatePatientForm(): JSX.Element {
         <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
           <TextField label="Nombre" {...register('name')} />
         </FormControl>
-        <FormControl fullWidth>
+        <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
           <TextField
             type="number"
             helperText={formState.errors?.name?.message}
             error={Boolean(formState.errors?.name?.message)}
-            label="Frecuencia Cardiaca"
+            label="Edad"
             {...register('age')}
             InputProps={{
               inputMode: 'numeric'
@@ -76,7 +76,9 @@ export default function CreatePatientForm(): JSX.Element {
           gridTemplateColumns: '47% 47%',
           position: 'absolute',
           bottom: '0',
-          left: '0'
+          left: '0',
+          zIndex: 3,
+          backgroundColor: 'white'
         }}
       >
         <Button variant="outlined">Cancelar</Button>
