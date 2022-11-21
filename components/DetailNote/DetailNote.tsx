@@ -1,6 +1,11 @@
-import { Box, Paper, Stack, Typography, Grid } from '@mui/material';
+import dynamic from 'next/dynamic';
+import { Box, Paper, Stack, Typography, Grid, Fab } from '@mui/material';
 import { NoteDetailType } from '../../hooks/useDetailNote';
 import { humanizeDate } from '../../src/utils';
+import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
+
+const DownloadPDF = dynamic(() => import('../PDF/DownloadPDF'), { ssr: false });
+
 // import { getImageURL } from '../../src/utils/index';
 
 export default function DetailNote({
@@ -10,6 +15,23 @@ export default function DetailNote({
 }): JSX.Element {
   return (
     <Box>
+      {data?.id && (
+        <DownloadPDF data={data}>
+          <Fab
+            sx={{
+              position: 'fixed',
+              right: '15px',
+              bottom: '15px',
+              borderRadius: '15px'
+            }}
+            color="primary"
+            aria-label="add"
+          >
+            <SimCardDownloadIcon fontSize="large" />
+          </Fab>
+        </DownloadPDF>
+      )}
+
       <Typography
         variant="h5"
         component="div"
@@ -204,7 +226,7 @@ export default function DetailNote({
       >
         Firma del asistente:
       </Typography>
-      {data?.assistant && (
+      {data?.assistant.length > 0 && (
         <Box>
           {data?.assistant ? <img src={data?.assistant} alt="asistente" /> : ''}
         </Box>

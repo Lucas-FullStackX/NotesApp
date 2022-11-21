@@ -84,8 +84,9 @@ export function useDetailNote({ id }): useFetchNotesResponse {
       }
       setLoading(false);
     }
-
-    loadData();
+    if (id) {
+      loadData();
+    }
   }, [id]);
   return { error, loading, data };
 }
