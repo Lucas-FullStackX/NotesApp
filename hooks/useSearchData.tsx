@@ -67,7 +67,8 @@ export function useSearchDataNotes(): useSearchDataResponse {
             id,
             created_at,
             name,
-            date_of_birth
+            date_of_birth,
+            age
           )`
       )
       .like('patient.name', `%${name}%`);

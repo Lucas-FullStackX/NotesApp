@@ -64,7 +64,8 @@ export function useDetailNote({ id }): useFetchNotesResponse {
           id,
           created_at,
           name,
-          date_of_birth
+          date_of_birth,
+          age
         )`
         )
         .eq('id', id);
