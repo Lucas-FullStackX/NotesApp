@@ -165,16 +165,20 @@ export default function DetailNote({
         elevation={2}
       >
         <Box>
-          <Typography variant="h6" component="div" fontWeight={700}>
-            Signos Vitales
-          </Typography>
           <Grid
             container
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           >
+            <Grid item xs={12}>
+              <Typography variant="h6" component="div" fontWeight={700}>
+                Signos Vitales
+              </Typography>
+            </Grid>
             <Grid item xs={6}>
-              Frecuencia cardiaca
+              <Typography variant="h6" component="div" fontWeight={400}>
+                Frecuencia cardiaca
+              </Typography>
               <Typography variant="body1" color="text.secondary">
                 {Array.isArray(data?.signs)
                   ? data?.signs[0].cardiac_frequency
@@ -182,7 +186,9 @@ export default function DetailNote({
               </Typography>
             </Grid>
             <Grid item xs={6}>
-              Presion sanguinea
+              <Typography variant="h6" component="div" fontWeight={400}>
+                Presion sanguinea
+              </Typography>
               <Typography variant="body1" color="text.secondary">
                 {Array.isArray(data?.signs)
                   ? data?.signs[0].sanguine_pressure
@@ -190,7 +196,9 @@ export default function DetailNote({
               </Typography>
             </Grid>
             <Grid item xs={6}>
-              Saturacion
+              <Typography variant="h6" component="div" fontWeight={400}>
+                Saturacion
+              </Typography>
               <Typography variant="body1" color="text.secondary">
                 {Array.isArray(data?.signs)
                   ? data?.signs[0].saturation
@@ -198,7 +206,9 @@ export default function DetailNote({
               </Typography>
             </Grid>
             <Grid item xs={6}>
-              Temperatura
+              <Typography variant="h6" component="div" fontWeight={400}>
+                Temperatura
+              </Typography>
               <Typography variant="body1" color="text.secondary">
                 {Array.isArray(data?.signs)
                   ? data?.signs[0].temperature + '°'
@@ -206,7 +216,9 @@ export default function DetailNote({
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              Observaciones
+              <Typography variant="h6" component="div" fontWeight={400}>
+                Observaciones
+              </Typography>
               <Typography variant="body1" color="text.secondary">
                 {Array.isArray(data?.signs)
                   ? data?.signs[0].news
