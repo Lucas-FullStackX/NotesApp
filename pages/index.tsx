@@ -5,6 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useRouter } from 'next/router';
 import { Box } from '@mui/material';
 import AuthForm from '../components/Auth/AuthForm';
+import Image from 'next/image';
 
 const LoginPage: NextPage = () => {
   const { session } = useSessionContext();
@@ -23,6 +24,13 @@ const LoginPage: NextPage = () => {
   if (!session)
     return (
       <Box m={3}>
+        <Image
+          src="/img/login.png"
+          alt="login"
+          width={500}
+          height={300}
+          objectFit="contain"
+        />
         <AuthForm />
       </Box>
     );

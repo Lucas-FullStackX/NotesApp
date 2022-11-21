@@ -3,12 +3,13 @@ import dayjs, { Dayjs } from 'dayjs';
 import es from 'dayjs/locale/es';
 import { MobileDatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { TextField, FormControl, Box, Button } from '@mui/material';
+import { TextField, FormControl, Box, Button, Typography } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useCreatePatientForm } from '../../hooks/useCreatePatientForm';
 import { useInsertPatient } from '../../hooks/useInsertPatient';
 import { LoadingButton } from '@mui/lab';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export default function CreatePatientForm(): JSX.Element {
   const router = useRouter();
@@ -26,6 +27,18 @@ export default function CreatePatientForm(): JSX.Element {
         insertPatient({ ...data, date_of_birth: dayjs(value).toString() });
       })}
     >
+      <Typography variant="h5" sx={{ gridColumn: 'span 2' }}>
+        Crear Paciente
+      </Typography>
+      <Box sx={{ gridColumn: 'span 2' }}>
+        <Image
+          src="/img/patient.png"
+          alt="login"
+          width={500}
+          height={300}
+          objectFit="contain"
+        />
+      </Box>
       <Box display="grid" flexDirection="column" gap={2}>
         <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
           <TextField label="Nombre" {...register('name')} />
