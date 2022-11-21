@@ -15,7 +15,7 @@ export default function CreatePatientForm(): JSX.Element {
   const router = useRouter();
   const { register, handleSubmit } = useCreatePatientForm();
   const [insertPatient, { data: insertNoteData, loading }] = useInsertPatient({
-    onComplete: () => router.push('/dashboard')
+    onComplete: () => router.push('/notes')
   });
   const [value, setValue] = useState<Dayjs | null>(dayjs());
   console.log(insertNoteData);

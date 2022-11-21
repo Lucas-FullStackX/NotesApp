@@ -21,7 +21,7 @@ export default function NavBar({ children }: { children: JSX.Element }) {
    */
   const getTitle = (): string => {
     const title = Object.values(ROUTES_FORMAT).find(
-      i => i.path.slice(0, 3) === location.pathname.slice(0, 3)
+      i => i.path.slice(0, 3) === router.pathname.slice(0, 3)
     );
     if (title) {
       return title.text;
