@@ -73,7 +73,7 @@ export function useDetailNote({ id }): useFetchNotesResponse {
         setError(notesError);
       }
       if (notesData) {
-        if (notesData[0].assistant.length > 0) {
+        if (notesData[0]?.assistant?.length > 0) {
           const { data: ImgData } = supabaseClient.storage
             .from('store')
             .getPublicUrl(notesData[0].assistant);

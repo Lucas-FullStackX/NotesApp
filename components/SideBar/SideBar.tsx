@@ -14,10 +14,21 @@ import { useRouter } from 'next/router';
 export const ROUTES: {
   routeName: string;
   route: string;
+  name: string;
   icon: ReactNode;
 }[] = [
-  { routeName: 'Notas', route: '/notes', icon: <TextSnippetIcon /> },
-  { routeName: 'Pacientes', route: '/patients', icon: <TextSnippetIcon /> }
+  {
+    routeName: 'Notas',
+    route: '/notes',
+    icon: <TextSnippetIcon />,
+    name: 'Nota'
+  },
+  {
+    routeName: 'Pacientes',
+    route: '/patients',
+    icon: <TextSnippetIcon />,
+    name: 'Paciente'
+  }
 ];
 
 export default function SideBar(
