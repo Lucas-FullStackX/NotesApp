@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button, Dialog, DialogContent, DialogTitle } from '@mui/material';
-import { Box } from '@mui/system';
+import { Button, Dialog, DialogContent, DialogTitle, Box } from '@mui/material';
 import SignatureCanvas from 'react-signature-canvas';
 
 /**

@@ -6,7 +6,7 @@ import type { NextPage } from 'next';
 import { Database } from '../lib/database.types';
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import CreateForm from '../components/CreateNotes/CreateForm';
-import { Box } from '@mui/system';
+import { Box } from '@mui/material';
 import NavBar from '../components/SideBar/NavBar';
 
 const CreateNotes: NextPage = () => {

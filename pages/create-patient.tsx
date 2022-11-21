@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { Box } from '@mui/system';
+import { Box } from '@mui/material';
 import CreatePatientForm from '../components/CreatePatients/CreatePatientForm';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import NavBar from '../components/SideBar/NavBar';
