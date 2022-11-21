@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import dayjs, { Dayjs } from 'dayjs';
-import es from 'dayjs/locale/es';
-import { MobileDatePicker } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { useState } from 'react';
+// import dayjs, { Dayjs } from 'dayjs';
+// import es from 'dayjs/locale/es';
+// import { MobileDatePicker } from '@mui/x-date-pickers';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TextField, FormControl, Box, Button, Typography } from '@mui/material';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useCreatePatientForm } from '../../hooks/useCreatePatientForm';
 import { useInsertPatient } from '../../hooks/useInsertPatient';
 import { LoadingButton } from '@mui/lab';
@@ -13,18 +13,17 @@ import Image from 'next/image';
 
 export default function CreatePatientForm(): JSX.Element {
   const router = useRouter();
-  const { register, handleSubmit } = useCreatePatientForm();
-  const [insertPatient, { data: insertNoteData, loading }] = useInsertPatient({
+  const { register, handleSubmit, formState } = useCreatePatientForm();
+  const [insertPatient, { loading }] = useInsertPatient({
     onComplete: () => router.push('/notes')
   });
-  const [value, setValue] = useState<Dayjs | null>(dayjs());
-  console.log(insertNoteData);
+  // const [value, setValue] = useState<Dayjs | null>(dayjs());
   return (
     <Box
       component="form"
       autoComplete="off"
       onSubmit={handleSubmit(data => {
-        insertPatient({ ...data, date_of_birth: dayjs(value).toString() });
+        insertPatient(data);
       })}
     >
       <Typography variant="h5" sx={{ gridColumn: 'span 2' }}>
@@ -43,7 +42,19 @@ export default function CreatePatientForm(): JSX.Element {
         <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
           <TextField label="Nombre" {...register('name')} />
         </FormControl>
-        <LocalizationProvider dateAdapter={AdapterDayjs} locale={es}>
+        <FormControl fullWidth>
+          <TextField
+            type="number"
+            helperText={formState.errors?.name?.message}
+            error={Boolean(formState.errors?.name?.message)}
+            label="Frecuencia Cardiaca"
+            {...register('age')}
+            InputProps={{
+              inputMode: 'numeric'
+            }}
+          />
+        </FormControl>
+        {/* <LocalizationProvider dateAdapter={AdapterDayjs} locale={es}>
           <MobileDatePicker
             label="Fecha de Nacimiento"
             value={value}
@@ -54,7 +65,7 @@ export default function CreatePatientForm(): JSX.Element {
               <TextField fullWidth sx={{ gridColumn: 'span 2' }} {...params} />
             )}
           />
-        </LocalizationProvider>
+        </LocalizationProvider> */}
       </Box>
       <Box
         display="grid"
