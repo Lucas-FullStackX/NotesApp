@@ -53,7 +53,7 @@ export default function DetailNote({
         <Stack spacing={1} p={2}>
           <Box>
             <Typography variant="h6" component="div" fontWeight={400}>
-              Estado
+              Estado General
             </Typography>
             <Typography variant="body1" color="text.secondary">
               {data?.general_state ?? ''}
@@ -61,7 +61,7 @@ export default function DetailNote({
           </Box>
           <Box>
             <Typography variant="h6" component="div" fontWeight={400}>
-              Creado
+              Fecha
             </Typography>
             <Typography variant="body1" color="text.secondary">
               {humanizeDate(data?.created_at) ?? ''}
@@ -80,6 +80,8 @@ export default function DetailNote({
               Deposición
             </Typography>
             <Typography variant="body1" color="text.secondary">
+              {data?.deposition.length > 0 ? 'SI' : 'NO'}
+              <br />
               {data?.deposition ?? ''}
             </Typography>
           </Box>
@@ -89,6 +91,8 @@ export default function DetailNote({
             </Typography>
           </Box>
           <Typography variant="body1" color="text.secondary">
+            {data?.dieresis.length > 0 ? 'SI' : 'NO'}
+            <br />
             {data?.dieresis ?? ''}
           </Typography>
           <Box>
@@ -96,7 +100,7 @@ export default function DetailNote({
               Emesis
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              {data?.emesis ?? ''}
+              {data?.emesis ? 'SI' : 'NO'}
             </Typography>
           </Box>
           <Box>
@@ -104,6 +108,8 @@ export default function DetailNote({
               Caidas
             </Typography>
             <Typography variant="body1" color="text.secondary">
+              {data?.falls.length > 0 ? 'SI' : 'NO'}
+              <br />
               {data?.falls ?? ''}
             </Typography>
           </Box>
@@ -112,7 +118,7 @@ export default function DetailNote({
               Alimentacion
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              {data?.food ?? ''}
+              {data?.food ? 'SI' : 'NO'}
             </Typography>
           </Box>
           <Box>
@@ -136,12 +142,12 @@ export default function DetailNote({
               Protesis
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              {data?.prosthesis ?? ''}
+              {data?.prosthesis ? 'SI' : 'NO'}
             </Typography>
           </Box>
           <Box>
             <Typography variant="h6" component="div" fontWeight={400}>
-              Sueño
+              Patron de Sueño
             </Typography>
             <Typography variant="body1" color="text.secondary">
               {data?.sleep ?? ''}
