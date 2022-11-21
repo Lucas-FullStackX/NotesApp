@@ -1,4 +1,4 @@
-import { Box, Paper, Stack, Typography } from '@mui/material';
+import { Box, Paper, Stack, Typography, Grid } from '@mui/material';
 import { NoteDetailType } from '../../hooks/useDetailNote';
 import { humanizeDate } from '../../src/utils';
 // import { getImageURL } from '../../src/utils/index';
@@ -8,7 +8,6 @@ export default function DetailNote({
 }: {
   data: NoteDetailType;
 }): JSX.Element {
-  console.log(data);
   return (
     <Box>
       <Typography
@@ -147,9 +146,52 @@ export default function DetailNote({
           <Typography variant="h6" component="div" fontWeight={700}>
             Signos Vitales
           </Typography>
-          <Typography variant="body1" color="text.secondary">
-            a
-          </Typography>
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          >
+            <Grid item xs={6}>
+              Frecuencia cardiaca
+              <Typography variant="body1" color="text.secondary">
+                {Array.isArray(data?.signs)
+                  ? data?.signs[0].cardiac_frequency
+                  : data?.signs?.cardiac_frequency ?? ''}
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              Presion sanguinea
+              <Typography variant="body1" color="text.secondary">
+                {Array.isArray(data?.signs)
+                  ? data?.signs[0].sanguine_pressure
+                  : data?.signs?.sanguine_pressure ?? ''}
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              Saturacion
+              <Typography variant="body1" color="text.secondary">
+                {Array.isArray(data?.signs)
+                  ? data?.signs[0].saturation
+                  : data?.signs?.saturation ?? ''}
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              Temperatura
+              <Typography variant="body1" color="text.secondary">
+                {Array.isArray(data?.signs)
+                  ? data?.signs[0].temperature + '°'
+                  : data?.signs?.temperature + '°' ?? ''}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              Observaciones
+              <Typography variant="body1" color="text.secondary">
+                {Array.isArray(data?.signs)
+                  ? data?.signs[0].news
+                  : data?.signs?.news ?? ''}
+              </Typography>
+            </Grid>
+          </Grid>
         </Box>
       </Paper>
       <Typography
@@ -160,11 +202,11 @@ export default function DetailNote({
           m: 2
         }}
       >
-        Firma del paciente:
+        Firma del asistente:
       </Typography>
       {data?.assistant && (
         <Box>
-          <img src={data?.assistant} alt="asssistente" />
+          {data?.assistant ? <img src={data?.assistant} alt="asistente" /> : ''}
         </Box>
       )}
     </Box>
