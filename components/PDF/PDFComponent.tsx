@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Image
 } from '@react-pdf/renderer';
-import { NoteData } from '../../hooks/useSearchData';
+import { NoteDetailType } from '../../hooks/useDetailNote';
 import { humanizeDate } from '../../src/utils';
 
 // Create styles
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
 });
 
 interface PdfComponentProps {
-  data: NoteData;
+  data: NoteDetailType;
 }
 
 /**
@@ -141,8 +141,8 @@ export default function PDFComponent({ data }: PdfComponentProps): JSX.Element {
             <View style={[styles.Column, { width: '25%' }]}>
               <Text style={styles.content}>
                 {Array.isArray(data?.patient)
-                  ? data?.patient[0].date_of_birth
-                  : data?.patient?.date_of_birth}
+                  ? data?.patient[0].age
+                  : data?.patient?.age}
               </Text>
             </View>
             <View style={[styles.Column, { width: '25%' }]}>
@@ -360,64 +360,43 @@ export default function PDFComponent({ data }: PdfComponentProps): JSX.Element {
             <View style={[styles.Column, { width: '25%' }]}>
               <Text style={styles.subTitle}>Temperatura</Text>
             </View>
-            {/* <View
-              style={[
-                styles.Row,
-                styles.VerticalCenter,
-                { width: '100%', padding: 10 }
-              ]}
-            >
-              <View style={[styles.Column, { width: '25%' }]}>
-                <Text style={styles.content}>
-                  {data.signs.sanguine_pressure}
-                </Text>
-              </View>
-              <View style={[styles.Column, { width: '25%' }]}>
-                <Text style={styles.content}>
-                  {data?.signs.cardiac_frequency}
-                </Text>
-              </View>
-              <View style={[styles.Column, { width: '25%' }]}>
-                <Text style={styles.content}> {data.signs.saturation}</Text>
-              </View>
-              <View style={[styles.Column, { width: '25%' }]}>
-                <Text style={styles.content}>{data.signs.temperature}ºC</Text>
-              </View>
-            </View> */}
-            {/* <View
-              style={[
-                styles.Row,
-                styles.VerticalCenter,
-                {
-                  backgroundColor: '#009688',
-                  width: '100%',
-                  height: 20,
-                  marginLeft: 10,
-                  marginRight: 10,
-                  marginBottom: 2,
-                  marginTop: 10,
-                  padding: 2
-                }
-              ]}
-            >
-              <View style={[styles.Column, { width: '100%' }]}>
-                <Text style={styles.subTitle}>Novedades</Text>
-              </View>
+          </View>
+          <View
+            style={[
+              styles.Row,
+              styles.VerticalCenter,
+              { width: '100%', padding: 10 }
+            ]}
+          >
+            <View style={[styles.Column, { width: '25%' }]}>
+              <Text style={styles.content}>
+                {Array.isArray(data?.signs)
+                  ? data.signs[0].sanguine_pressure
+                  : data.signs.sanguine_pressure}
+              </Text>
             </View>
-            <View
-              style={[
-                styles.Row,
-                styles.VerticalCenter,
-                styles.Wrap,
-                { width: '100%', padding: 10 }
-              ]}
-            >
-              <View style={[styles.Column, { width: '100%' }]}>
-                <Text style={[styles.content, { textAlign: 'justify' }]}>
-                  {data?.signs.news}
-                  </Text>
-                  </View>
-                </View> */}
+            <View style={[styles.Column, { width: '25%' }]}>
+              <Text style={styles.content}>
+                {Array.isArray(data?.signs)
+                  ? data.signs[0].cardiac_frequency
+                  : data.signs.cardiac_frequency}
+              </Text>
+            </View>
+            <View style={[styles.Column, { width: '25%' }]}>
+              <Text style={styles.content}>
+                {Array.isArray(data?.signs)
+                  ? data.signs[0].saturation
+                  : data.signs.saturation}
+              </Text>
+            </View>
+            <View style={[styles.Column, { width: '25%' }]}>
+              <Text style={styles.content}>
+                {Array.isArray(data?.signs)
+                  ? data.signs[0].temperature
+                  : data.signs.temperature}
+                ºC
+              </Text>
+            </View>
           </View>
           <View
             style={[
@@ -451,12 +430,14 @@ export default function PDFComponent({ data }: PdfComponentProps): JSX.Element {
             <View style={{ width: '100%', padding: 10 }}>
               <Text style={styles.title}>Asistente</Text>
             </View>
-            <View style={[styles.Column, { width: '100%', padding: 2 }]}>
-              <Image
-                style={{ width: 60, height: 60 }}
-                source={data?.assistant ?? data?.assistant ?? ' '}
-              />
-            </View>
+            {data?.assistant.length > 0 && (
+              <View style={[styles.Column, { width: '100%', padding: 2 }]}>
+                <Image
+                  style={{ width: 60, height: 60 }}
+                  source={data?.assistant ?? data?.assistant ?? ' '}
+                />
+              </View>
+            )}
           </View>
         </View>
       </Page>

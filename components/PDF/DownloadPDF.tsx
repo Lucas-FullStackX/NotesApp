@@ -1,5 +1,5 @@
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import { NoteData } from '../../hooks/useSearchData';
+import { NoteDetailType } from '../../hooks/useDetailNote';
 import PDFComponent from './PDFComponent';
 
 export default function DownloadPDF({
@@ -7,14 +7,21 @@ export default function DownloadPDF({
   children
 }: {
   children: JSX.Element;
-  data: NoteData;
+  data: NoteDetailType;
 }): JSX.Element {
+  console.log(data, 'exist');
   return (
-    <PDFDownloadLink
-      document={<PDFComponent data={data} />}
-      fileName={`Nota-${data.id}-${new Date()}.pdf`}
-    >
-      {children}
-    </PDFDownloadLink>
+    <>
+      {(() => data !== undefined)() && data.id ? (
+        <PDFDownloadLink
+          document={<PDFComponent data={data} />}
+          fileName={`Nota-${data.id}-${new Date()}.pdf`}
+        >
+          {obj => (obj.loading ? <div>Loading</div> : <>{children}</>)}
+        </PDFDownloadLink>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }

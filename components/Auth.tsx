@@ -20,6 +20,7 @@ export function Auth() {
         <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
           <TextField
             label="Email"
+            type="email"
             multiline
             minRows={3}
             {...register('email')}
