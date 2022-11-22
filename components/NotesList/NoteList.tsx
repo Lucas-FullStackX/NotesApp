@@ -26,7 +26,7 @@ export default function NotesList({ notes }: NotesListProps) {
         color="primary"
         aria-label="add"
         onClick={() => {
-          router.push('/create-notes');
+          router.push('/notes/create-notes');
         }}
       >
         <AddIcon fontSize="large" />
