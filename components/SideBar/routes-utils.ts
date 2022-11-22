@@ -59,11 +59,11 @@ export const ROUTES = createRoutes({
     path: '/notes',
     internalPaths: {
       CREATE_NOTE: {
-        path: '/create-note',
-        text: 'Create Note',
+        path: '/create-notes',
+        text: 'Crear Nota',
         internalPaths: {}
       },
-      JOB_DETAIL: {
+      NOTE_DETAIL: {
         path: '/:id',
         text: 'Nota',
         internalPaths: {}
@@ -75,13 +75,13 @@ export const ROUTES = createRoutes({
     path: '/patients',
     internalPaths: {
       CREATE_PATIENT: {
-        path: '/create-note',
-        text: 'Create Note',
+        path: '/create-patient',
+        text: 'Crear Paciente',
         internalPaths: {}
       },
       PATIENT_DETAIL: {
         path: '/:id',
-        text: 'Nota',
+        text: 'Paciente',
         internalPaths: {}
       }
     }

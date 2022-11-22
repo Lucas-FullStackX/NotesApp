@@ -29,7 +29,7 @@ export default function Card({ info, type }: CardProps): JSX.Element {
     return (
       <Paper
         onClick={() => {
-          router.push(`/patient/${info.id}`);
+          router.push(`/patients/${info.id}`);
         }}
         sx={{ p: 2 }}
         elevation={elevation}
@@ -53,7 +53,7 @@ export default function Card({ info, type }: CardProps): JSX.Element {
     return (
       <Paper
         onClick={() => {
-          router.push(`/note/${info.id}`);
+          router.push(`/notes/${info.id}`);
         }}
         sx={{ p: 2 }}
         elevation={elevation}
@@ -83,7 +83,7 @@ export default function Card({ info, type }: CardProps): JSX.Element {
   return (
     <Paper
       onClick={() => {
-        router.push(`/note/${info.id}`);
+        router.push(`/notes/${info.id}`);
       }}
       sx={{ p: 1 }}
       elevation={elevation}

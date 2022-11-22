@@ -3,11 +3,11 @@ import {
   useSupabaseClient
 } from '@supabase/auth-helpers-react';
 import type { NextPage } from 'next';
-import { Database } from '../lib/database.types';
+import { Database } from '../../lib/database.types';
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
-import CreateForm from '../components/CreateNotes/CreateForm';
+import CreateForm from '../../components/CreateNotes/CreateForm';
 import { Box } from '@mui/material';
-import NavBar from '../components/SideBar/NavBar';
+import NavBar from '../../components/SideBar/NavBar';
 
 const CreateNotes: NextPage = () => {
   const { isLoading, session, error } = useSessionContext();

@@ -26,7 +26,7 @@ export default function PatientsList({ patients }: PatientsListProps) {
         color="primary"
         aria-label="add"
         onClick={() => {
-          router.push('/create-patient');
+          router.push('/patients/create-patient');
         }}
       >
         <AddIcon fontSize="large" />
