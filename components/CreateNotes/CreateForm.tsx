@@ -12,7 +12,9 @@ import {
   CircularProgress,
   Typography,
   InputAdornment,
-  FormHelperText
+  FormHelperText,
+  IconButton,
+  styled
 } from '@mui/material';
 import {
   SKIN_TYPES,
@@ -32,23 +34,41 @@ import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { Context } from '../../src/store/Context';
 import { SignatureMenu } from './components/SignatureModal';
+import AddIcon from '@mui/icons-material/Add';
 import Image from 'next/image';
+import { CreatePatientModal } from './components/PatientModal';
+
+const AddButton = styled(IconButton)(({ theme }) => ({
+  borderRadius: theme.shape.borderRadius,
+  color: 'white',
+  padding: theme.spacing(1),
+  backgroundColor: theme.palette.primary.main,
+  '&:hover': {
+    backgroundColor: theme.palette.primary.dark
+  }
+}));
 
 export default function CreateForm(): JSX.Element {
   const router = useRouter();
   const { success } = useContext(Context);
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<{ signature: boolean; patient: boolean }>({
+    signature: false,
+    patient: false
+  });
   const [image, setImage] = useState<string>('');
   const { register, handleSubmit, watch, setValue, formState } =
     useCreateNoteForm();
-  const { loading: loadingPatients, data: Patients } = useFetchPatients();
-  const [insertNote, { data: insertNoteData }] = useInsertNote({
+  const {
+    loading: loadingPatients,
+    data: Patients,
+    refresh
+  } = useFetchPatients();
+  const [insertNote] = useInsertNote({
     onComplete: () => {
       router.push('/notes');
       success('Nota Creada');
     }
   });
-  console.log(insertNoteData);
   return (
     <Box
       component="form"
@@ -61,9 +81,14 @@ export default function CreateForm(): JSX.Element {
         insertNote(newData);
       })}
     >
+      <CreatePatientModal
+        open={open.patient}
+        close={() => setOpen({ ...open, patient: false })}
+        onSubmit={refresh}
+      />
       <SignatureMenu
-        open={open}
-        close={() => setOpen(false)}
+        open={open.signature}
+        close={() => setOpen({ ...open, signature: false })}
         onChange={(assistant, base) => {
           setImage(base);
           setValue('assistant', assistant);
@@ -81,7 +106,15 @@ export default function CreateForm(): JSX.Element {
           objectFit="contain"
         />
       </Box>
-      <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
+      <FormControl
+        fullWidth
+        sx={{
+          gridColumn: 'span 2',
+          display: 'grid',
+          gridTemplateColumns: '80% 16%',
+          justifyContent: 'space-between'
+        }}
+      >
         <Autocomplete
           isOptionEqualToValue={(option, value) => option.id === value.id}
           getOptionLabel={option =>
@@ -120,6 +153,12 @@ export default function CreateForm(): JSX.Element {
             />
           )}
         />
+        <AddButton
+          color="primary"
+          onClick={() => setOpen({ ...open, patient: true })}
+        >
+          <AddIcon fontSize="large" />
+        </AddButton>
       </FormControl>
       <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
         <InputLabel>Estado General</InputLabel>
@@ -269,7 +308,7 @@ export default function CreateForm(): JSX.Element {
       <Button
         variant="text"
         sx={{ gridColumn: 'span 2' }}
-        onClick={() => setOpen(true)}
+        onClick={() => setOpen({ ...open, signature: true })}
       >
         {image.length ? 'Editar' : 'Firma'}
       </Button>
