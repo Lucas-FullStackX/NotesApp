@@ -1,12 +1,34 @@
-import { Box, Paper, Stack, Typography } from '@mui/material';
+import { Box, Paper, Stack, Typography, Skeleton } from '@mui/material';
 import { Database } from '../../lib/database.types';
 
 export default function DetailPatient({
-  data
+  data,
+  loading
 }: {
   data: Database['public']['Tables']['patient']['Row'][];
+  loading: boolean;
 }): JSX.Element {
   console.log(data);
+  if (loading) {
+    return (
+      <Box
+        m={2}
+        sx={{
+          width: '90vw'
+        }}
+      >
+        <Skeleton
+          width="150px"
+          sx={{ margin: '12px', height: '50px' }}
+        ></Skeleton>
+        <Skeleton
+          variant="rectangular"
+          width="100%"
+          sx={{ margin: '12px', height: '20vh' }}
+        ></Skeleton>
+      </Box>
+    );
+  }
   return (
     <Box>
       <Typography

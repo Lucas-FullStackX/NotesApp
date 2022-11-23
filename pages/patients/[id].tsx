@@ -9,11 +9,11 @@ import NavBar from '../../components/SideBar/NavBar';
 const NoteDetail: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { data } = useDetailPatient({ id });
+  const { data, loading } = useDetailPatient({ id });
   return (
     <NavBar>
       <Suspense fallback={<CardSkeleton />}>
-        <DetailPatient data={data} />
+        <DetailPatient data={data} loading={loading} />
       </Suspense>
     </NavBar>
   );

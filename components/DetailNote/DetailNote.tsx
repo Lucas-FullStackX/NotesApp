@@ -110,7 +110,7 @@ export default function DetailNote({
               Deposición
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              {data?.deposition.length > 0 ? 'SI' : 'NO'}
+              {data?.deposition?.length > 0 ? 'SI' : 'NO'}
               <br />
               {data?.deposition ?? ''}
             </Typography>
@@ -121,7 +121,7 @@ export default function DetailNote({
             </Typography>
           </Box>
           <Typography variant="body1" color="text.secondary">
-            {data?.dieresis.length > 0 ? 'SI' : 'NO'}
+            {data?.dieresis?.length > 0 ? 'SI' : 'NO'}
             <br />
             {data?.dieresis ?? ''}
           </Typography>
@@ -138,7 +138,7 @@ export default function DetailNote({
               Caidas
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              {data?.falls.length > 0 ? 'SI' : 'NO'}
+              {data?.falls?.length > 0 ? 'SI' : 'NO'}
               <br />
               {data?.falls ?? ''}
             </Typography>
