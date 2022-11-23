@@ -37,6 +37,8 @@ import { SignatureMenu } from './components/SignatureModal';
 import AddIcon from '@mui/icons-material/Add';
 import Image from 'next/image';
 import { CreatePatientModal } from './components/PatientModal';
+import { PatternFormat } from 'react-number-format';
+import { Controller } from 'react-hook-form';
 
 const AddButton = styled(IconButton)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
@@ -47,7 +49,6 @@ const AddButton = styled(IconButton)(({ theme }) => ({
     backgroundColor: theme.palette.primary.dark
   }
 }));
-
 export default function CreateForm(): JSX.Element {
   const router = useRouter();
   const { success } = useContext(Context);
@@ -56,7 +57,7 @@ export default function CreateForm(): JSX.Element {
     patient: false
   });
   const [image, setImage] = useState<string>('');
-  const { register, handleSubmit, watch, setValue, formState } =
+  const { control, register, handleSubmit, watch, setValue, formState } =
     useCreateNoteForm();
   const {
     loading: loadingPatients,
@@ -326,6 +327,29 @@ export default function CreateForm(): JSX.Element {
       <Typography variant="h5" sx={{ gridColumn: 'span 2' }}>
         Signos Vitales
       </Typography>
+      <FormControl fullWidth>
+        <Controller
+          control={control}
+          name="sanguine_pressure"
+          render={({ field: { onChange, name, value } }) => (
+            <PatternFormat
+              label="Tension Arterial"
+              type="tel"
+              helperText={formState.errors?.sanguine_pressure?.message}
+              error={Boolean(formState.errors?.sanguine_pressure?.message)}
+              customInput={TextField}
+              format={
+                String(value).replace(/\s+/g, '').length > 5
+                  ? '###/###'
+                  : '##/####'
+              }
+              name={name}
+              value={value}
+              onChange={onChange}
+            />
+          )}
+        />
+      </FormControl>
       <FormControl fullWidth>
         <TextField
           type="number"
