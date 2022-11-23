@@ -23,6 +23,7 @@ export default function DetailNote({
   data: NoteDetailType;
   loading: boolean;
 }): JSX.Element {
+  console.log(data, 'a');
   if (loading) {
     return (
       <Box
@@ -223,7 +224,7 @@ export default function DetailNote({
             </Grid>
             <Grid item xs={6}>
               <Typography variant="h6" component="div" fontWeight={400}>
-                Presion sanguinea
+                Tensión arterial
               </Typography>
               <Typography variant="body1" color="text.secondary">
                 {Array.isArray(data?.signs)
