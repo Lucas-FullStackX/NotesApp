@@ -17,7 +17,7 @@ export default function DownloadPDF({
           document={<PDFComponent data={data} />}
           fileName={`Nota-${data.id}-${new Date()}.pdf`}
         >
-          {obj => (obj.loading ? <div>Loading</div> : <>{children}</>)}
+          {children}
         </PDFDownloadLink>
       ) : (
         <></>

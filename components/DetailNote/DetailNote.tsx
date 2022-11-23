@@ -1,5 +1,13 @@
 import dynamic from 'next/dynamic';
-import { Box, Paper, Stack, Typography, Grid, Fab } from '@mui/material';
+import {
+  Box,
+  Paper,
+  Stack,
+  Typography,
+  Grid,
+  Fab,
+  Skeleton
+} from '@mui/material';
 import { NoteDetailType } from '../../hooks/useDetailNote';
 import { humanizeDate } from '../../src/utils';
 import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
@@ -9,10 +17,33 @@ const DownloadPDF = dynamic(() => import('../PDF/DownloadPDF'), { ssr: false });
 // import { getImageURL } from '../../src/utils/index';
 
 export default function DetailNote({
-  data
+  data,
+  loading
 }: {
   data: NoteDetailType;
+  loading: boolean;
 }): JSX.Element {
+  console.log(data, 'a');
+  if (loading) {
+    return (
+      <Box
+        m={2}
+        sx={{
+          width: '90vw'
+        }}
+      >
+        <Skeleton
+          width="150px"
+          sx={{ margin: '12px', height: '50px' }}
+        ></Skeleton>
+        <Skeleton
+          variant="rectangular"
+          width="100%"
+          sx={{ margin: '12px', height: '70vh' }}
+        ></Skeleton>
+      </Box>
+    );
+  }
   return (
     <Box>
       {data?.id && (
@@ -80,7 +111,7 @@ export default function DetailNote({
               Deposición
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              {data?.deposition ? 'SI' : 'NO'}
+              {data?.deposition?.length > 0 ? 'SI' : 'NO'}
               <br />
               {data?.deposition ?? ''}
             </Typography>
@@ -91,7 +122,7 @@ export default function DetailNote({
             </Typography>
           </Box>
           <Typography variant="body1" color="text.secondary">
-            {data?.dieresis ? 'SI' : 'NO'}
+            {data?.dieresis?.length > 0 ? 'SI' : 'NO'}
             <br />
             {data?.dieresis ?? ''}
           </Typography>
@@ -108,7 +139,7 @@ export default function DetailNote({
               Caidas
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              {data?.falls ? 'SI' : 'NO'}
+              {data?.falls?.length > 0 ? 'SI' : 'NO'}
               <br />
               {data?.falls ?? ''}
             </Typography>
@@ -193,7 +224,7 @@ export default function DetailNote({
             </Grid>
             <Grid item xs={6}>
               <Typography variant="h6" component="div" fontWeight={400}>
-                Presion sanguinea
+                Tensión arterial
               </Typography>
               <Typography variant="body1" color="text.secondary">
                 {Array.isArray(data?.signs)
