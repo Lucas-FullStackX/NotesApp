@@ -34,10 +34,7 @@ export const NOTE_FORM_VALIDATOR_SCHEMA = yup
     news: yup.string(),
     sleep: yup.string(),
     assistant: yup.mixed(),
-    sanguine_pressure: yup
-      .number()
-      .typeError('Debe ser un numero')
-      .required('Requerido'),
+    sanguine_pressure: yup.string().required('Requerido'),
     cardiac_frequency: yup.number().nullable().default(0),
     saturation: yup.number().nullable().default(0),
     temperature: yup.number().nullable().default(0),

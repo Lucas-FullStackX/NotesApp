@@ -12,9 +12,7 @@ import {
   CircularProgress,
   Typography,
   InputAdornment,
-  FormHelperText,
-  IconButton,
-  styled
+  FormHelperText
 } from '@mui/material';
 import {
   SKIN_TYPES,
@@ -34,13 +32,13 @@ import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { Context } from '../../src/store/Context';
 import { SignatureMenu } from './components/SignatureModal';
-import AddIcon from '@mui/icons-material/Add';
+// import AddIcon from '@mui/icons-material/Add';
 import Image from 'next/image';
 import { CreatePatientModal } from './components/PatientModal';
 import { PatternFormat } from 'react-number-format';
 import { Controller } from 'react-hook-form';
 
-const AddButton = styled(IconButton)(({ theme }) => ({
+/* const AddButton = styled(IconButton)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   color: 'white',
   padding: theme.spacing(1),
@@ -48,7 +46,7 @@ const AddButton = styled(IconButton)(({ theme }) => ({
   '&:hover': {
     backgroundColor: theme.palette.primary.dark
   }
-}));
+})); */
 export default function CreateForm(): JSX.Element {
   const router = useRouter();
   const { success } = useContext(Context);
@@ -110,10 +108,10 @@ export default function CreateForm(): JSX.Element {
       <FormControl
         fullWidth
         sx={{
-          gridColumn: 'span 2',
-          display: 'grid',
+          gridColumn: 'span 2'
+          /*  display: 'grid',
           gridTemplateColumns: '80% 16%',
-          justifyContent: 'space-between'
+          justifyContent: 'space-between' */
         }}
       >
         <Autocomplete
@@ -154,12 +152,12 @@ export default function CreateForm(): JSX.Element {
             />
           )}
         />
-        <AddButton
+        {/*  <AddButton
           color="primary"
           onClick={() => setOpen({ ...open, patient: true })}
         >
           <AddIcon fontSize="large" />
-        </AddButton>
+        </AddButton> */}
       </FormControl>
       <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
         <InputLabel>Estado General</InputLabel>
@@ -350,18 +348,7 @@ export default function CreateForm(): JSX.Element {
           )}
         />
       </FormControl>
-      <FormControl fullWidth>
-        <TextField
-          type="number"
-          label="Tension Arterial"
-          helperText={formState.errors?.sanguine_pressure?.message}
-          error={Boolean(formState.errors?.sanguine_pressure?.message)}
-          {...register('sanguine_pressure')}
-          InputProps={{
-            inputMode: 'numeric'
-          }}
-        />
-      </FormControl>
+
       <FormControl fullWidth>
         <TextField
           type="number"

@@ -124,7 +124,7 @@ export interface Database {
         Row: {
           id: number;
           created_at: string | null;
-          sanguine_pressure: number | null;
+          sanguine_pressure: string | null;
           cardiac_frequency: number | null;
           saturation: number | null;
           temperature: number | null;
@@ -133,7 +133,7 @@ export interface Database {
         Insert: {
           id?: number;
           created_at?: string | null;
-          sanguine_pressure?: number | null;
+          sanguine_pressure?: string | null;
           cardiac_frequency?: number | null;
           saturation?: number | null;
           temperature?: number | null;
@@ -142,7 +142,7 @@ export interface Database {
         Update: {
           id?: number;
           created_at?: string | null;
-          sanguine_pressure?: number | null;
+          sanguine_pressure?: string | null;
           cardiac_frequency?: number | null;
           saturation?: number | null;
           temperature?: number | null;
