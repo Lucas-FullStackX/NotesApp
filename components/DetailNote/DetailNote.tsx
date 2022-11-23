@@ -154,7 +154,7 @@ export default function DetailNote({
           </Box>
           <Box>
             <Typography variant="h6" component="div" fontWeight={400}>
-              Administracion Medicamentos
+              Administracion de Medicamentos
             </Typography>
             <Typography variant="body1" color="text.secondary">
               {data?.medicines ?? ''}
@@ -249,7 +249,7 @@ export default function DetailNote({
               <Typography variant="body1" color="text.secondary">
                 {Array.isArray(data?.signs)
                   ? data?.signs[0].temperature + '°'
-                  : data?.signs?.temperature + '°' ?? ''}
+                  : `${data?.signs?.temperature ?? ''}°C`}
               </Typography>
             </Grid>
             <Grid item xs={12}>
@@ -275,7 +275,7 @@ export default function DetailNote({
       >
         Firma del asistente
       </Typography>
-      {data?.assistant.length > 0 && (
+      {data?.assistant?.length > 0 && (
         <Paper
           sx={{
             m: 2,

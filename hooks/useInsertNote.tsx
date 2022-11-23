@@ -26,7 +26,7 @@ export function useInsertNote({
   const createNote: useInsertNoteResponse[0] = async info => {
     setLoading(true);
     let SignaturePath = '';
-    if (info?.note?.assistant.length > 1) {
+    if (info?.note?.assistant?.length > 1) {
       const { data: SignatureData } = await supabaseClient.storage
         .from('store')
         .upload(
