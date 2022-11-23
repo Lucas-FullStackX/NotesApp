@@ -430,7 +430,7 @@ export default function PDFComponent({ data }: PdfComponentProps): JSX.Element {
             <View style={{ width: '100%', padding: 10 }}>
               <Text style={styles.title}>Asistente</Text>
             </View>
-            {data?.assistant.length > 0 && (
+            {data?.assistant?.length > 0 && (
               <View style={[styles.Column, { width: '100%', padding: 2 }]}>
                 <Image
                   style={{ width: 60, height: 60 }}
