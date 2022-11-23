@@ -25,8 +25,9 @@ export function useInsertNote({
   const supabaseClient = useSupabaseClient<Database>();
   const createNote: useInsertNoteResponse[0] = async info => {
     setLoading(true);
-    const { data: SignatureData, error: SignatureError } =
-      await supabaseClient.storage
+    let SignaturePath = '';
+    if (info?.note?.assistant.length > 1) {
+      const { data: SignatureData } = await supabaseClient.storage
         .from('store')
         .upload(
           `signature/${info.note.patient}${
@@ -38,7 +39,8 @@ export function useInsertNote({
             upsert: false
           }
         );
-    console.log(SignatureError);
+      SignaturePath = SignatureData.path;
+    }
     const { error: VitalError, data: VitalData } = await supabaseClient
       .from('vital_signs')
       .insert(info.vital_signs)
@@ -49,7 +51,7 @@ export function useInsertNote({
         .from('notes')
         .insert({
           ...info.note,
-          assistant: SignatureData.path,
+          assistant: SignaturePath.length > 0 ? SignaturePath : null,
           signs: VitalData[0].id
         })
         .select();
