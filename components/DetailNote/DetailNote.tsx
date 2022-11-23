@@ -69,7 +69,7 @@ export default function DetailNote({
           </Box>
           <Box>
             <Typography variant="h6" component="div" fontWeight={400}>
-              Estado anémico
+              Estado animico
             </Typography>
             <Typography variant="body1" color="text.secondary">
               {data?.anemic_state ?? ''}
@@ -80,18 +80,18 @@ export default function DetailNote({
               Deposición
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              {data?.deposition.length > 0 ? 'SI' : 'NO'}
+              {data?.deposition ? 'SI' : 'NO'}
               <br />
               {data?.deposition ?? ''}
             </Typography>
           </Box>
           <Box>
             <Typography variant="h6" component="div" fontWeight={400}>
-              Diéresis
+              Diuresis
             </Typography>
           </Box>
           <Typography variant="body1" color="text.secondary">
-            {data?.dieresis.length > 0 ? 'SI' : 'NO'}
+            {data?.dieresis ? 'SI' : 'NO'}
             <br />
             {data?.dieresis ?? ''}
           </Typography>
@@ -108,7 +108,7 @@ export default function DetailNote({
               Caidas
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              {data?.falls.length > 0 ? 'SI' : 'NO'}
+              {data?.falls ? 'SI' : 'NO'}
               <br />
               {data?.falls ?? ''}
             </Typography>
@@ -123,7 +123,7 @@ export default function DetailNote({
           </Box>
           <Box>
             <Typography variant="h6" component="div" fontWeight={400}>
-              Medicinas
+              Administracion Medicamentos
             </Typography>
             <Typography variant="body1" color="text.secondary">
               {data?.medicines ?? ''}
@@ -242,12 +242,24 @@ export default function DetailNote({
           m: 2
         }}
       >
-        Firma del asistente:
+        Firma del asistente
       </Typography>
       {data?.assistant.length > 0 && (
-        <Box>
-          {data?.assistant ? <img src={data?.assistant} alt="asistente" /> : ''}
-        </Box>
+        <Paper
+          sx={{
+            m: 2,
+            p: 2
+          }}
+          elevation={2}
+        >
+          <Box display="flex" justifyContent="center">
+            {data?.assistant ? (
+              <img src={data?.assistant} alt="asistente" />
+            ) : (
+              ''
+            )}
+          </Box>
+        </Paper>
       )}
     </Box>
   );
