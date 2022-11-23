@@ -7,6 +7,7 @@ type useFetchPatientsResponse = {
   data: Database['public']['Tables']['patient']['Row'][];
   error?: PostgrestError;
   loading: boolean;
+  refresh: () => void;
 };
 
 export function useFetchPatients(): useFetchPatientsResponse {
@@ -15,23 +16,22 @@ export function useFetchPatients(): useFetchPatientsResponse {
   const [data, setData] = useState<useFetchPatientsResponse['data']>([]);
   const supabaseClient = useSupabaseClient<Database>();
 
-  useEffect(() => {
-    async function loadData() {
-      setLoading(true);
-      const { error: patientsError, data: patientsData } = await supabaseClient
-        .from('patient')
-        .select('*')
-        .order('created_at', { ascending: false });
-      if (patientsError) {
-        setError(patientsError);
-      }
-      if (patientsData) {
-        setData(patientsData);
-      }
-      setLoading(false);
+  const loadData = async () => {
+    setLoading(true);
+    const { error: patientsError, data: patientsData } = await supabaseClient
+      .from('patient')
+      .select('*')
+      .order('created_at', { ascending: false });
+    if (patientsError) {
+      setError(patientsError);
     }
-
+    if (patientsData) {
+      setData(patientsData);
+    }
+    setLoading(false);
+  };
+  useEffect(() => {
     loadData();
   }, []);
-  return { error, loading, data };
+  return { error, loading, data, refresh: loadData };
 }

@@ -100,7 +100,7 @@ export default function DetailNote({
           </Box>
           <Box>
             <Typography variant="h6" component="div" fontWeight={400}>
-              Estado anémico
+              Estado animico
             </Typography>
             <Typography variant="body1" color="text.secondary">
               {data?.anemic_state ?? ''}
@@ -118,7 +118,7 @@ export default function DetailNote({
           </Box>
           <Box>
             <Typography variant="h6" component="div" fontWeight={400}>
-              Diéresis
+              Diuresis
             </Typography>
           </Box>
           <Typography variant="body1" color="text.secondary">
@@ -154,7 +154,7 @@ export default function DetailNote({
           </Box>
           <Box>
             <Typography variant="h6" component="div" fontWeight={400}>
-              Medicinas
+              Administracion Medicamentos
             </Typography>
             <Typography variant="body1" color="text.secondary">
               {data?.medicines ?? ''}
@@ -275,10 +275,22 @@ export default function DetailNote({
       >
         Firma del asistente
       </Typography>
-      {data?.assistant && (
-        <Box sx={{ paddingLeft: '15px' }}>
-          {data?.assistant ? <img src={data?.assistant} alt="asistente" /> : ''}
-        </Box>
+      {data?.assistant.length > 0 && (
+        <Paper
+          sx={{
+            m: 2,
+            p: 2
+          }}
+          elevation={2}
+        >
+          <Box display="flex" justifyContent="center">
+            {data?.assistant ? (
+              <img src={data?.assistant} alt="asistente" />
+            ) : (
+              ''
+            )}
+          </Box>
+        </Paper>
       )}
     </Box>
   );

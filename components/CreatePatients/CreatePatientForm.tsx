@@ -11,11 +11,24 @@ import { LoadingButton } from '@mui/lab';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
-export default function CreatePatientForm(): JSX.Element {
+interface CreatePatientForm {
+  onSubmit?: () => void;
+  onCancel?: () => void;
+}
+
+export default function CreatePatientForm({
+  onSubmit,
+  onCancel
+}: CreatePatientForm): JSX.Element {
   const router = useRouter();
   const { register, handleSubmit, formState } = useCreatePatientForm();
   const [insertPatient, { loading }] = useInsertPatient({
-    onComplete: () => router.push('/notes')
+    onComplete: () =>
+      onSubmit
+        ? onSubmit()
+        : () => {
+            router.push('/notes');
+          }
   });
   // const [value, setValue] = useState<Dayjs | null>(dayjs());
   return (
@@ -71,14 +84,18 @@ export default function CreatePatientForm(): JSX.Element {
         display="grid"
         justifyContent="space-between"
         pt={3}
-        pb={3}
         sx={{
           width: '100%',
           gridTemplateColumns: '47% 47%',
           backgroundColor: 'white'
         }}
       >
-        <Button variant="outlined" href="patients">
+        <Button
+          variant="outlined"
+          onClick={() => {
+            onCancel ? onCancel() : router.push('/patients');
+          }}
+        >
           Cancelar
         </Button>
         <LoadingButton type="submit" variant="contained" loading={loading}>

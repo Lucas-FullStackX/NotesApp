@@ -7,7 +7,12 @@ import {
 
 export function useCreateNoteForm() {
   const data = useForm<NoteFormType>({
-    resolver: yupResolver(NOTE_FORM_VALIDATOR_SCHEMA, {})
+    resolver: yupResolver(NOTE_FORM_VALIDATOR_SCHEMA, {}),
+    defaultValues: {
+      saturation: null,
+      cardiac_frequency: null,
+      temperature: null
+    }
   });
 
   return data;
