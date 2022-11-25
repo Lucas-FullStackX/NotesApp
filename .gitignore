@@ -12,6 +12,9 @@
 /.next/
 /out/
 
+/public/*.js.map
+/public/*.js
+
 # production
 /build
 .env
