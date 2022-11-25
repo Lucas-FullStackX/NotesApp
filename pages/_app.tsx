@@ -40,21 +40,10 @@ export default function MyApp(props: MyAppProps) {
           <meta name="keywords" content="Keywords" />
 
           <link rel="manifest" href="/manifest.json" />
-          <link
-            href="/icons/favicon-16x16.png"
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-          />
-          <link
-            href="/icons/favicon-32x32.png"
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-          />
-          <link rel="apple-touch-icon" href="/icons/icon-192x192.png"></link>
+
+          <link rel="apple-touch-icon" href="/icons/icon-ios.png"></link>
           <meta name="theme-color" content="#009688" />
-          <title>Reverde Ser</title>
+          <title>ReverdeSer</title>
           <meta name="viewport" content="initial-scale=1, width=device-width" />
         </Head>
         <AppProvider>

@@ -1,33 +1,13 @@
 {
-  "name": "RerverSer Notas",
-  "short_name": "RerverSer Notas",
+  "name": "RerverdeSer Notas",
+  "short_name": "RerverdeSer Notas",
   "theme_color": "#004740",
   "background_color": "#004740",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
   "start_url": "/",
   "icons": [
-    {
-      "src": "icons/icon-72x72.png",
-      "sizes": "72x72",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/icon-96x96.png",
-      "sizes": "96x96",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/icon-128x128.png",
-      "sizes": "128x128",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/icon-144x144.png",
-      "sizes": "144x144",
-      "type": "image/png"
-    },
     {
       "src": "icons/icon-152x152.png",
       "sizes": "152x152",
