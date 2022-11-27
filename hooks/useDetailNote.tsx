@@ -2,8 +2,8 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { Database } from '../lib/database.types';
 import { useEffect, useState } from 'react';
 import { PostgrestError } from '@supabase/supabase-js';
+import { Overwrite } from '../src/types';
 
-type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
 export type NoteDetailType = Overwrite<
   Database['public']['Tables']['notes']['Row'],
   {

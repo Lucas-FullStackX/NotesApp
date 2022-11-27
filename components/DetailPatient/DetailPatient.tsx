@@ -1,11 +1,11 @@
 import { Box, Paper, Stack, Typography, Skeleton } from '@mui/material';
-import { Database } from '../../lib/database.types';
+import { useDetailPatientResponse } from '../../hooks/useDetailPatient';
 
 export default function DetailPatient({
   data,
   loading
 }: {
-  data: Database['public']['Tables']['patient']['Row'][];
+  data: useDetailPatientResponse['data'];
   loading: boolean;
 }): JSX.Element {
   console.log(data);
@@ -39,7 +39,7 @@ export default function DetailPatient({
           m: 2
         }}
       >
-        {data[0]?.name ?? ''}
+        {data?.name ?? ''}
       </Typography>
       <Paper
         sx={{
@@ -53,7 +53,7 @@ export default function DetailPatient({
               Edad
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              {data[0]?.age ?? ''}
+              {data?.age ?? ''}
             </Typography>
             <Typography variant="h6" component="div" fontWeight={400}>
               Notas
