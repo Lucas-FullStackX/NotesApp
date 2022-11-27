@@ -32,42 +32,7 @@ export function useDetailNote({ id }): useFetchNotesResponse {
       setLoading(true);
       const { error: notesError, data: notesData } = await supabaseClient
         .from('notes')
-        .select(
-          `id,
-        created_at,
-        general_state,
-        anemic_state,
-        skin,
-        emesis,
-        prosthesis,
-        medicines,
-        wandering,
-        falls,
-        deposition,
-        dieresis,
-        food,
-        news,
-        sleep,
-        assistant,
-        created_by,
-        signs:vital_signs(
-          id,
-          created_at,
-          sanguine_pressure,
-          cardiac_frequency,
-          saturation,
-          temperature,
-          news
-        ),
-        code,
-        patient(
-          id,
-          created_at,
-          name,
-          date_of_birth,
-          age
-        )`
-        )
+        .select(`*,signs:vital_signs(*),patient(*)`)
         .eq('id', id);
       if (notesError) {
         setError(notesError);

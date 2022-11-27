@@ -1,5 +1,6 @@
 import { Box, Paper, Stack, Typography, Skeleton } from '@mui/material';
 import { useDetailPatientResponse } from '../../hooks/useDetailPatient';
+import Card, { TYPE_CARD } from '../Card/BaseCard';
 
 export default function DetailPatient({
   data,
@@ -56,11 +57,31 @@ export default function DetailPatient({
               {data?.age ?? ''}
             </Typography>
             <Typography variant="h6" component="div" fontWeight={400}>
-              Notas
+              EPS
+            </Typography>
+            <Typography variant="body1" color="text.secondary">
+              {data?.eps ?? ''}
             </Typography>
           </Box>
         </Stack>
       </Paper>
+      <Typography
+        variant="h4"
+        component="div"
+        fontWeight="bold"
+        sx={{
+          ml: 2
+        }}
+      >
+        Notas
+      </Typography>
+      <Stack spacing={1} p={2}>
+        {data?.notes &&
+          Array.isArray(data.notes) &&
+          data.notes.map(note => (
+            <Card type={TYPE_CARD.PATIENT_NOTE} info={note} key={note.id} />
+          ))}
+      </Stack>
     </Box>
   );
 }

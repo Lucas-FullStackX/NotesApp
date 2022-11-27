@@ -43,34 +43,7 @@ export function useSearchDataNotes(): useSearchDataResponse {
     setLoading(true);
     const { error: notesError, data: notesData } = await supabaseClient
       .from('notes')
-      .select(
-        `id,
-          created_at,
-          general_state,
-          anemic_state,
-          skin,
-          emesis,
-          prosthesis,
-          medicines,
-          wandering,
-          falls,
-          deposition,
-          dieresis,
-          food,
-          news,
-          sleep,
-          assistant,
-          signs,
-          code,
-          created_by,
-          patient(
-            id,
-            created_at,
-            name,
-            date_of_birth,
-            age
-          )`
-      )
+      .select(`*,patient(*)`)
       .like('patient.name', `%${name}%`);
     if (notesError) {
       setError(notesError);

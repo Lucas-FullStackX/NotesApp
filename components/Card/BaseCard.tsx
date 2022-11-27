@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Paper, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
-import { humanizeDate } from '../../src/utils';
+import { dateWithName, humanizeDate } from '../../src/utils';
 import { Database } from '../../lib/database.types';
 
 import { StatusChip } from '../Chip/StatusChips';
@@ -9,13 +9,18 @@ import { NoteData } from '../../hooks/useSearchData';
 
 export enum TYPE_CARD {
   NOTE = 'NOTE',
-  PATIENT = 'PATIENT'
+  PATIENT = 'PATIENT',
+  PATIENT_NOTE = 'PATIENT NOTE'
 }
 
 type CardProps =
   | {
       info: NoteData;
-      type: TYPE_CARD.NOTE;
+      type: TYPE_CARD.NOTE | TYPE_CARD.PATIENT_NOTE;
+    }
+  | {
+      info: Database['public']['Tables']['notes']['Row'];
+      type: TYPE_CARD.PATIENT_NOTE;
     }
   | {
       info: Database['public']['Tables']['patient']['Row'];
@@ -69,6 +74,35 @@ export default function Card({ info, type }: CardProps): JSX.Element {
             {Array.isArray(info.patient)
               ? info.patient[0].name
               : info.patient?.name ?? 'Sin Paciente'}
+          </Typography>
+          <Stack direction="row" spacing={1}>
+            <StatusChip label={info.anemic_state} type={info.anemic_state} />
+          </Stack>
+          <Typography variant="body1" component="div">
+            {humanizeDate(info.created_at ?? '')}
+          </Typography>
+        </Stack>
+      </Paper>
+    );
+  }
+  if (type === TYPE_CARD.PATIENT_NOTE) {
+    return (
+      <Paper
+        onClick={() => {
+          router.push(`/notes/${info.id}`);
+        }}
+        sx={{ p: 2 }}
+        elevation={elevation}
+        onMouseOver={() => {
+          setElevation(5);
+        }}
+        onMouseOut={() => {
+          setElevation(2);
+        }}
+      >
+        <Stack spacing={1}>
+          <Typography variant="h4" component="div" fontWeight={700}>
+            {dateWithName(info.created_at ?? '')}
           </Typography>
           <Stack direction="row" spacing={1}>
             <StatusChip label={info.anemic_state} type={info.anemic_state} />

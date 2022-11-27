@@ -84,6 +84,7 @@ export interface Database {
           name: string;
           date_of_birth: string | null;
           age: number | null;
+          eps: string | null;
         };
         Insert: {
           id?: number;
@@ -91,6 +92,7 @@ export interface Database {
           name: string;
           date_of_birth?: string | null;
           age?: number | null;
+          eps?: string | null;
         };
         Update: {
           id?: number;
@@ -98,6 +100,7 @@ export interface Database {
           name?: string;
           date_of_birth?: string | null;
           age?: number | null;
+          eps?: string | null;
         };
       };
       user_roles: {
@@ -105,19 +108,19 @@ export interface Database {
           id: number;
           created_at: string | null;
           user: string | null;
-          role: string | null;
+          role: Database['public']['Enums']['role_user'] | null;
         };
         Insert: {
           id?: number;
           created_at?: string | null;
           user?: string | null;
-          role?: string | null;
+          role?: Database['public']['Enums']['role_user'] | null;
         };
         Update: {
           id?: number;
           created_at?: string | null;
           user?: string | null;
-          role?: string | null;
+          role?: Database['public']['Enums']['role_user'] | null;
         };
       };
       vital_signs: {
@@ -160,7 +163,7 @@ export interface Database {
       };
     };
     Enums: {
-      [_ in never]: never;
+      role_user: 'ADMIN' | 'NURSE';
     };
   };
 }
